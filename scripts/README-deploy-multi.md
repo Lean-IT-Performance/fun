@@ -2,6 +2,8 @@
 
 Ce projet inclut un système de déploiement FTP multi-sites qui permet de déployer sélectivement différentes parties du site.
 
+> Les scripts fonctionnent sur **macOS**, **Linux** et **Windows** via Node.js.
+
 ## Configuration
 
 Le script utilise automatiquement votre fichier `.env` existant avec vos informations FTP.

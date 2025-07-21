@@ -165,6 +165,8 @@ npm run deploy
 
 Pour plus de détails, consultez [scripts/README.md](./scripts/README.md).
 
+> Les scripts de déploiement sont écrits en Node.js et fonctionnent aussi bien sous **macOS**, **Linux** que **Windows**.
+
 ## 🔒 Sécurité
 
 ### Mesures implémentées
