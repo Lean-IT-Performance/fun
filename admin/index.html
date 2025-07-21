@@ -118,6 +118,21 @@
 
             <!-- Configuration -->
             <section class="admin-settings">
+                <div class="settings-card">
+                    <h3>🤖 Modèle ChatGPT pour les Recettes</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label for="recipe-model-select">Modèle OpenAI</label>
+                            <select id="recipe-model-select">
+                                <option value="gpt-4o-mini">GPT-4o-mini</option>
+                                <option value="gpt-4">GPT-4</option>
+                                <option value="gpt-3.5-turbo">GPT-3.5-turbo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="save-recipe-model" class="btn-save">Enregistrer</button>
+                </div>
+
                 <div class="test-tools-card">
                     <h3>🔧 Outils de Test</h3>
                     <p>Accéder aux pages de diagnostic et test pour résoudre les problèmes</p>
