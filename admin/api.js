@@ -46,7 +46,14 @@ class OpenAIAPI {
                 start_date: startDate,
                 end_date: endDate
             });
-            const response = await fetch(`/api/admin/openai-usage.php?${params}`);
+
+            const options = {};
+            const authToken = sessionStorage.getItem('admin_auth_token');
+            if (authToken) {
+                options.headers = { 'Authorization': `Bearer ${authToken}` };
+            }
+
+            const response = await fetch(`/api/admin/openai-usage.php?${params}`, options);
             
             const responseData = await response.json();
             
