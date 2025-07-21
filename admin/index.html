@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console Admin - Fun Lean IT Performance</title>
+    <meta name="description" content="Console d'administration pour le monitoring des coûts API OpenAI">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Écran de connexion -->
+    <div id="login-screen" class="login-container">
+        <div class="login-box">
+            <div class="logo">
+                <h1>🔐 Console Admin</h1>
+                <p>Fun Lean IT Performance</p>
+            </div>
+            
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="btn-login">Se connecter</button>
+                
+                <div id="login-error" class="error-message" style="display: none;"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard principal -->
+    <div id="admin-dashboard" class="dashboard" style="display: none;">
+        <header>
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="../">🏠 Accueil</a>
+                    <span>›</span>
+                    <span>Console Admin</span>
+                </nav>
+                <h1>🔐 Console d'Administration</h1>
+                <p>Monitoring des coûts d'usage OpenAI</p>
+            </div>
+        </header>
+
+        <!-- Actions utilisateur -->
+        <div class="user-actions">
+            <div class="container">
+                <div class="user-info">
+                    <span>Connecté en tant qu'admin</span>
+                    <button id="logout-btn" class="btn-logout">Déconnexion</button>
+                </div>
+            </div>
+        </div>
+
+        <main class="container">
+            <!-- Statistiques rapides -->
+            <section class="stats-overview">
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <h3>Coût du mois</h3>
+                        <div class="stat-value" id="monthly-cost">--</div>
+                        <div class="stat-change" id="monthly-change">--</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-content">
+                        <h3>Requêtes aujourd'hui</h3>
+                        <div class="stat-value" id="daily-requests">--</div>
+                        <div class="stat-change" id="daily-change">--</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <h3>Tokens utilisés</h3>
+                        <div class="stat-value" id="tokens-used">--</div>
+                        <div class="stat-change" id="tokens-change">--</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-content">
+                        <h3>Coût moyen/requête</h3>
+                        <div class="stat-value" id="avg-cost">--</div>
+                        <div class="stat-change" id="avg-change">--</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Graphiques -->
+            <section class="charts-section">
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>📊 Évolution des Coûts (30 derniers jours)</h3>
+                        <div class="chart-controls">
+                            <select id="chart-period">
+                                <option value="7">7 jours</option>
+                                <option value="30" selected>30 jours</option>
+                                <option value="90">90 jours</option>
+                            </select>
+                        </div>
+                    </div>
+                    <canvas id="cost-chart"></canvas>
+                </div>
+            </section>
+
+            <!-- Configuration -->
+            <section class="admin-settings">
+                <div class="test-tools-card">
+                    <h3>🔧 Outils de Test</h3>
+                    <p>Accéder aux pages de diagnostic et test pour résoudre les problèmes</p>
+                    <div class="test-links">
+                        <a href="test-auth.html" class="test-link" target="_blank">
+                            <div class="test-icon">🔐</div>
+                            <div class="test-info">
+                                <div class="test-title">Test Authentification</div>
+                                <div class="test-desc">Vérifier l'authentification admin et les variables d'environnement</div>
+                            </div>
+                        </a>
+                        
+                        <a href="test-backend.html" class="test-link" target="_blank">
+                            <div class="test-icon">🧪</div>
+                            <div class="test-info">
+                                <div class="test-title">Test Backend OpenAI</div>
+                                <div class="test-desc">Tester l'endpoint backend et l'API Usage d'OpenAI</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="test-note">
+                        💡 <strong>Conseil :</strong> Utilisez ces outils si vous rencontrez des problèmes de connexion ou de données.
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js" defer></script>
+    <script src="api.js" defer></script>
+    <script src="script.js" defer></script>
+</body>
+</html> 

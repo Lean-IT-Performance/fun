@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - Calculateur de Taux d'Alcoolémie</title>
+    <meta name="description" content="Application web pour la consommation responsable d'alcool avec calcul scientifique du taux d'alcoolémie">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../">🏠 Accueil</a>
+                <span>›</span>
+                <span>Sobre</span>
+            </nav>
+            <h1>🍺 Sobre</h1>
+            <p>Calculateur de Taux d'Alcoolémie</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="disclaimer">
+            <p><strong>⚠️ Avertissement :</strong> Cette application fournit des estimations uniquement. Ne vous fiez jamais à ces calculs pour prendre le volant. Consultez toujours un professionnel de santé.</p>
+        </div>
+
+        <section id="profile-section" class="card">
+            <h2>Votre Profil</h2>
+            <form id="profile-form">
+                <div class="form-group">
+                    <label for="weight">Poids (kg):</label>
+                    <input type="number" id="weight" min="30" max="200" step="1" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">Sexe:</label>
+                    <select id="gender" required>
+                        <option value="">Sélectionner</option>
+                        <option value="male">Homme</option>
+                        <option value="female">Femme</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="driver-type">Type de conducteur:</label>
+                    <select id="driver-type" required>
+                        <option value="">Sélectionner</option>
+                        <option value="experienced">Conducteur expérimenté (limite 0,5g/L)</option>
+                        <option value="apprentice">Conducteur apprenti (limite 0,2g/L)</option>
+                        <option value="professional">Conducteur professionnel (limite 0,2g/L)</option>
+                        <option value="none">Je ne conduis pas</option>
+                    </select>
+                </div>
+                
+                <button type="submit">Enregistrer le profil</button>
+            </form>
+        </section>
+
+        <section id="session-section" class="card" style="display: none;">
+            <h2>Session de Consommation</h2>
+
+            <div class="bac-display">
+                <h3>Taux d'Alcoolémie Actuel</h3>
+                <div class="bac-value" id="bac-value">0.00 g/L</div>
+                <div class="bac-status" id="bac-status">Sobre</div>
+                <div class="driving-status" id="driving-status" style="display: none;">
+                    <span class="driving-indicator" id="driving-indicator">🚗 Conduite autorisée</span>
+                </div>
+            </div>
+
+            <!-- Onglets de navigation -->
+            <div class="tabs">
+                <button class="tab-button active" data-tab="add-drink">Ajouter</button>
+                <button class="tab-button" data-tab="drinks-table">Tableau</button>
+                <button class="tab-button" data-tab="chart">Graphique</button>
+                <button class="tab-button" data-tab="settings">Paramètres</button>
+            </div>
+
+            <!-- Onglet Ajouter une consommation -->
+            <div id="add-drink-tab" class="tab-content active">
+                <h3>Ajouter une Consommation</h3>
+                <form id="drink-form">
+                    <div class="form-group">
+                        <label for="drink-time">Heure de consommation:</label>
+                        <input type="datetime-local" id="drink-time" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="drink-type">Type de boisson:</label>
+                        <select id="drink-type" required>
+                            <option value="">Sélectionner</option>
+                            <option value="beer-light">Bière légère (3-4%)</option>
+                            <option value="beer-standard">Bière standard (5%)</option>
+                            <option value="beer-strong">Bière forte (6-8%)</option>
+                            <option value="wine-white">Vin blanc (11-12%)</option>
+                            <option value="wine-red">Vin rouge (12-14%)</option>
+                            <option value="champagne">Champagne (12%)</option>
+                            <option value="spirits">Spiritueux (40%)</option>
+                            <option value="custom">Personnalisé</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contenance:</label>
+                        <div class="container-buttons">
+                            <button type="button" class="container-btn" data-container="dose">
+                                🥃 Dose<br><span>4cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="shooter">
+                                🔥 Shooter<br><span>3cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="coupe">
+                                🥂 Coupe<br><span>12cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="verre-vin">
+                                🍷 Verre vin<br><span>12cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="verre-eau">
+                                🥤 Verre eau<br><span>20cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="demi">
+                                🍺 Demi<br><span>25cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="pinte">
+                                🍻 Pinte<br><span>50cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="bouteille-biere">
+                                🍾 Bouteille<br><span>33cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="canette">
+                                🥫 Canette<br><span>33cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="custom">
+                                ⚙️ Autre<br><span>--</span>
+                            </button>
+                        </div>
+                        <input type="hidden" id="container-type" required>
+                    </div>
+                    
+                    <div class="form-group" id="custom-volume" style="display: none;">
+                        <label for="volume">Volume personnalisé (ml):</label>
+                        <input type="number" id="volume" min="10" max="1000" step="10">
+                    </div>
+                    
+                    <div class="volume-display">
+                        <span id="volume-display">--</span>
+                    </div>
+
+                    <div class="form-group" id="custom-alcohol" style="display: none;">
+                        <label for="alcohol-content">Taux d'alcool (%):</label>
+                        <input type="number" id="alcohol-content" min="0" max="70" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label>État digestif au moment de la consommation:</label>
+                        <div class="digestive-buttons">
+                            <button type="button" class="digestive-btn active" data-state="empty">
+                                🥜 Estomac vide
+                            </button>
+                            <button type="button" class="digestive-btn" data-state="eating">
+                                🍴 En mangeant
+                            </button>
+                            <button type="button" class="digestive-btn" data-state="full">
+                                🥘 Estomac plein
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit">Ajouter la boisson</button>
+                </form>
+
+                <div id="drinks-list">
+                    <h3>Dernières Boissons</h3>
+                    <div id="drinks-container"></div>
+                </div>
+
+                <div class="predictions">
+                    <h3>Prédictions</h3>
+                    <p id="soberness-time">Temps avant sobriété: --</p>
+                </div>
+            </div>
+
+            <!-- Onglet Tableau des consommations -->
+            <div id="drinks-table-tab" class="tab-content">
+                <h3>Tableau des Consommations</h3>
+                <div class="table-container">
+                    <table id="drinks-table">
+                        <thead>
+                            <tr>
+                                <th>Heure</th>
+                                <th>Type</th>
+                                <th>Volume</th>
+                                <th>Alcool %</th>
+                                <th>État digestif</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="drinks-table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Onglet Graphique -->
+            <div id="chart-tab" class="tab-content">
+                <h3>Évolution du Taux d'Alcoolémie</h3>
+                <div class="chart-container">
+                    <canvas id="bac-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- Onglet Paramètres -->
+            <div id="settings-tab" class="tab-content">
+                <h3>Paramètres</h3>
+                <div class="settings-section">
+                    <h4>Profil Utilisateur</h4>
+                    <p id="profile-info">Non configuré</p>
+                    <button id="edit-profile-btn" class="secondary-btn">Modifier le profil</button>
+                </div>
+                
+                <div class="settings-section">
+                    <h4>Session Actuelle</h4>
+                    <p id="session-info">Aucune session</p>
+                    <button id="new-session-btn" class="secondary-btn">Nouvelle session</button>
+                </div>
+
+                <div class="settings-section">
+                    <h4>Données</h4>
+                    <p>Supprimer toutes les données et recommencer à zéro</p>
+                    <button id="reset-data-btn" class="danger-btn">Tout effacer</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal d'édition -->
+        <div id="edit-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Modifier la Consommation</h3>
+                <form id="edit-drink-form">
+                    <input type="hidden" id="edit-drink-id">
+                    
+                    <div class="form-group">
+                        <label for="edit-drink-time">Heure de consommation:</label>
+                        <input type="datetime-local" id="edit-drink-time" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-drink-type">Type de boisson:</label>
+                        <select id="edit-drink-type" required>
+                            <option value="">Sélectionner</option>
+                            <option value="beer-light">Bière légère (3-4%)</option>
+                            <option value="beer-standard">Bière standard (5%)</option>
+                            <option value="beer-strong">Bière forte (6-8%)</option>
+                            <option value="wine-white">Vin blanc (11-12%)</option>
+                            <option value="wine-red">Vin rouge (12-14%)</option>
+                            <option value="champagne">Champagne (12%)</option>
+                            <option value="spirits">Spiritueux (40%)</option>
+                            <option value="custom">Personnalisé</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contenance:</label>
+                        <div class="container-buttons">
+                            <button type="button" class="container-btn" data-container="dose">
+                                🥃 Dose<br><span>4cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="shooter">
+                                🔥 Shooter<br><span>3cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="coupe">
+                                🥂 Coupe<br><span>12cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="verre-vin">
+                                🍷 Verre vin<br><span>12cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="verre-eau">
+                                🥤 Verre eau<br><span>20cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="demi">
+                                🍺 Demi<br><span>25cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="pinte">
+                                🍻 Pinte<br><span>50cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="bouteille-biere">
+                                🍾 Bouteille<br><span>33cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="canette">
+                                🥫 Canette<br><span>33cl</span>
+                            </button>
+                            <button type="button" class="container-btn" data-container="custom">
+                                ⚙️ Autre<br><span>--</span>
+                            </button>
+                        </div>
+                        <input type="hidden" id="edit-container-type" required>
+                    </div>
+                    
+                    <div class="form-group" id="edit-custom-volume" style="display: none;">
+                        <label for="edit-volume">Volume personnalisé (ml):</label>
+                        <input type="number" id="edit-volume" min="10" max="1000" step="10">
+                    </div>
+                    
+                    <div class="volume-display">
+                        <span id="edit-volume-display">--</span>
+                    </div>
+
+                    <div class="form-group" id="edit-custom-alcohol" style="display: none;">
+                        <label for="edit-alcohol-content">Taux d'alcool (%):</label>
+                        <input type="number" id="edit-alcohol-content" min="0" max="70" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label>État digestif au moment de la consommation:</label>
+                        <div class="digestive-buttons" id="edit-digestive-buttons">
+                            <button type="button" class="digestive-btn active" data-state="empty">
+                                🥜 Estomac vide
+                            </button>
+                            <button type="button" class="digestive-btn" data-state="eating">
+                                🍴 En mangeant
+                            </button>
+                            <button type="button" class="digestive-btn" data-state="full">
+                                🥘 Estomac plein
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="modal-buttons">
+                        <button type="submit">Enregistrer</button>
+                        <button type="button" class="cancel-btn">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Sobre utilise la formule scientifique de Widmark pour les calculs. Les résultats sont des estimations uniquement.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

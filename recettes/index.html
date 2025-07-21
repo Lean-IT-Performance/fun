@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Recettes - Générateur de recettes intelligentes</title>
+    <meta name="description" content="Découvrez des recettes délicieuses basées sur les ingrédients de votre frigo - Anti-gaspillage et économique">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../">🏠 Accueil</a>
+                <span>›</span>
+                <span>Mes Recettes</span>
+            </nav>
+            <h1>🍳 Mes Recettes</h1>
+            <p>Transformez vos ingrédients en délicieux repas</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="ingredients-input">
+            <div class="card">
+                <h2>Que trouvez-vous dans votre frigo ?</h2>
+                <p>Ajoutez les ingrédients disponibles et découvrez les recettes possibles</p>
+                
+                <div class="input-section">
+                    <div class="ingredient-input">
+                        <input type="text" id="ingredient-input" placeholder="Ex: tomates, fromage, pâtes..." autocomplete="off">
+                        <button id="add-ingredient" class="btn-primary">Ajouter</button>
+                    </div>
+                    
+                    <div class="quick-ingredients">
+                        <h4>Suggestions rapides :</h4>
+                        <div class="ingredient-suggestions">
+                            <button class="suggestion-btn" data-ingredient="œufs">🥚 Œufs</button>
+                            <button class="suggestion-btn" data-ingredient="tomates">🍅 Tomates</button>
+                            <button class="suggestion-btn" data-ingredient="fromage">🧀 Fromage</button>
+                            <button class="suggestion-btn" data-ingredient="pâtes">🍝 Pâtes</button>
+                            <button class="suggestion-btn" data-ingredient="riz">🍚 Riz</button>
+                            <button class="suggestion-btn" data-ingredient="pommes de terre">🥔 Pommes de terre</button>
+                            <button class="suggestion-btn" data-ingredient="poulet">🐔 Poulet</button>
+                            <button class="suggestion-btn" data-ingredient="oignons">🧅 Oignons</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="selected-ingredients">
+                    <h4>Vos ingrédients :</h4>
+                    <div id="ingredients-list" class="ingredients-container">
+                        <div class="empty-state">
+                            <span>Aucun ingrédient sélectionné</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="advanced-options">
+                    <h4>Paramètres de la recette :</h4>
+                    
+                    <div class="options-grid">
+                        <div class="option-group">
+                            <label for="convives-slider">👥 Nombre de convives : <span id="convives-value">4</span></label>
+                            <input type="range" id="convives-slider" min="1" max="12" value="4" class="slider">
+                        </div>
+
+                        <div class="option-group">
+                            <label for="type-public">👶 Type de public :</label>
+                            <select id="type-public" class="select-input">
+                                <option value="adultes">Adultes</option>
+                                <option value="enfants">Enfants</option>
+                                <option value="mixte">Mixte (adultes + enfants)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label for="difficulte">🎯 Difficulté :</label>
+                            <select id="difficulte" class="select-input">
+                                <option value="très facile">Très facile</option>
+                                <option value="facile" selected>Facile</option>
+                                <option value="moyen">Moyen</option>
+                                <option value="difficile">Difficile</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label for="temps-disponible">⏱️ Temps disponible :</label>
+                            <select id="temps-disponible" class="select-input">
+                                <option value="15min">15 minutes</option>
+                                <option value="30min" selected>30 minutes</option>
+                                <option value="1h">1 heure</option>
+                                <option value="2h+">2 heures ou plus</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label for="type-repas">🍽️ Type de repas :</label>
+                            <select id="type-repas" class="select-input">
+                                <option value="petit-déjeuner">Petit-déjeuner</option>
+                                <option value="déjeuner" selected>Déjeuner</option>
+                                <option value="dîner">Dîner</option>
+                                <option value="apéritif">Apéritif</option>
+                                <option value="dessert">Dessert</option>
+                                <option value="goûter">Goûter</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="constraints-section">
+                        <h4>🚫 Contraintes alimentaires :</h4>
+                        <div class="constraints-grid">
+                            <label class="constraint-option">
+                                <input type="checkbox" id="vegetarien" value="végétarien">
+                                <span>🌱 Végétarien</span>
+                            </label>
+                            <label class="constraint-option">
+                                <input type="checkbox" id="vegan" value="vegan">
+                                <span>🥬 Vegan</span>
+                            </label>
+                            <label class="constraint-option">
+                                <input type="checkbox" id="sans-gluten" value="sans gluten">
+                                <span>🌾 Sans gluten</span>
+                            </label>
+                            <label class="constraint-option">
+                                <input type="checkbox" id="sans-lactose" value="sans lactose">
+                                <span>🥛 Sans lactose</span>
+                            </label>
+                            <label class="constraint-option">
+                                <input type="checkbox" id="sans-noix" value="sans noix">
+                                <span>🥜 Sans noix</span>
+                            </label>
+                            <label class="constraint-option">
+                                <input type="checkbox" id="halal" value="halal">
+                                <span>🕌 Halal</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="equipment-section">
+                        <h4>🔧 Matériel disponible :</h4>
+                        <div class="equipment-grid">
+                            <label class="equipment-option">
+                                <input type="checkbox" id="four" value="four" checked>
+                                <span>🔥 Four</span>
+                            </label>
+                            <label class="equipment-option">
+                                <input type="checkbox" id="plaques" value="plaques" checked>
+                                <span>🍳 Plaques de cuisson</span>
+                            </label>
+                            <label class="equipment-option">
+                                <input type="checkbox" id="micro-ondes" value="micro-ondes">
+                                <span>📡 Micro-ondes</span>
+                            </label>
+                            <label class="equipment-option">
+                                <input type="checkbox" id="robot" value="robot">
+                                <span>🤖 Robot mixeur</span>
+                            </label>
+                            <label class="equipment-option">
+                                <input type="checkbox" id="friteuse" value="friteuse">
+                                <span>🍟 Friteuse</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="generate-ai-recipe" class="btn-search btn-ai" disabled>
+                    🤖 Générer une recette IA
+                </button>
+                
+                <button id="find-recipes" class="btn-search btn-local">
+                    📖 Recettes locales
+                </button>
+            </div>
+        </section>
+
+        <section id="recipes-section" class="recipes-results" style="display: none;">
+            <h2>Recettes suggérées</h2>
+            <div id="recipes-container" class="recipes-grid">
+                <!-- Les recettes seront générées ici -->
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>Pourquoi utiliser Mes Recettes ?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">♻️</div>
+                    <h3>Anti-gaspillage</h3>
+                    <p>Utilisez vos ingrédients avant qu'ils ne périment</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💡</div>
+                    <h3>Inspiration culinaire</h3>
+                    <p>Découvrez de nouvelles combinaisons d'ingrédients</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <h3>Économique</h3>
+                    <p>Cuisinez avec ce que vous avez déjà</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Gain de temps</h3>
+                    <p>Plus besoin de chercher pendant des heures</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Fun Lean IT Performance - Mes Recettes</p>
+            <p>Données de recettes générées par intelligence artificielle</p>
+        </div>
+    </footer>
+
+    <!-- Modal pour afficher une recette détaillée -->
+    <div id="recipe-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="recipe-details">
+                <!-- Contenu de la recette détaillée -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Backend OpenAI Usage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+        }
+        
+        /* En-tête de navigation */
+        .nav-header {
+            background: #2563eb;
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .nav-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .nav-back {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .nav-back:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .nav-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .nav-breadcrumb {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        /* Contenu principal */
+        .main-content {
+            margin: 30px auto;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        button {
+            background: #007cba;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #005a87;
+        }
+        .result {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+        .success {
+            border-color: #4caf50;
+            background: #e8f5e8;
+        }
+        .error {
+            border-color: #f44336;
+            background: #ffeaea;
+        }
+        .loading {
+            border-color: #ff9800;
+            background: #fff3e0;
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête de navigation -->
+    <header class="nav-header">
+        <div class="nav-content">
+            <a href="../admin/" class="nav-back">
+                ← Retour à la Console Admin
+            </a>
+            <div>
+                <div class="nav-title">🧪 Test Backend OpenAI</div>
+                <div class="nav-breadcrumb">Console Admin > Tests > Backend OpenAI</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <div class="main-content">
+        <div class="container">
+            <h1>🧪 Test Backend OpenAI Billing API</h1>
+            <p>Cette page permet de tester l'endpoint backend <code>/api/admin/openai-usage.php</code> qui utilise l'API <code>dashboard/billing/usage</code>.</p>
+
+            <div class="test-section">
+                <h3>📋 Test 1: Diagnostic de la configuration</h3>
+                <p>Vérifier que le fichier .env est accessible et contient les bonnes variables.</p>
+                <button onclick="testEnvFile()">🔍 Lancer le diagnostic</button>
+                <div id="env-result" class="result" style="display: none;"></div>
+            </div>
+
+            <div class="test-section">
+                <h3>🌐 Test 2: Endpoint de facturation OpenAI</h3>
+                <p>Tester l'appel à l'API de facturation via le backend.</p>
+                <div>
+                    <label>Date début:</label>
+                    <input type="date" id="start-date" value="">
+                    <label>Date fin:</label>
+                    <input type="date" id="end-date" value="">
+                </div>
+                <br>
+                <button onclick="testOpenAIUsage()">📊 Tester l'API de facturation</button>
+                <div id="usage-result" class="result" style="display: none;"></div>
+            </div>
+            
+            <div class="test-section">
+                <h3>📝 Logs de Debug</h3>
+                <div id="debug-logs" class="result">Prêt pour les tests...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialiser les dates par défaut
+        window.onload = function() {
+            const endDate = new Date();
+            const startDate = new Date();
+            startDate.setDate(startDate.getDate() - 7); // 7 derniers jours
+            
+            document.getElementById('start-date').value = startDate.toISOString().split('T')[0];
+            document.getElementById('end-date').value = endDate.toISOString().split('T')[0];
+        };
+
+        function log(message) {
+            const logs = document.getElementById('debug-logs');
+            const timestamp = new Date().toLocaleTimeString();
+            logs.textContent += `[${timestamp}] ${message}\n`;
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        async function testEnvFile() {
+            const resultDiv = document.getElementById('env-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result loading';
+            resultDiv.textContent = '⏳ Test en cours...';
+            
+            log('🔧 Début du test des variables d\'environnement');
+
+            try {
+                // Essayer d'abord l'endpoint de diagnostic spécialisé
+                log('🔬 Test avec endpoint de diagnostic spécialisé...');
+                
+                const diagResponse = await fetch('/api/admin/config-test.php', {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                if (diagResponse.ok) {
+                    const diagData = await diagResponse.json();
+                    
+                    if (diagData.success && diagData.debug) {
+                        resultDiv.className = 'result success';
+                        
+                        const envVars = diagData.debug.env_vars_found || [];
+                        const hasOpenAI = envVars.some(v => v.key === 'OPENAI_API_KEY');
+                        const hasOrgId = envVars.some(v => v.key === 'OPENAI_ORG_ID');
+                        
+                        let summary = `✅ Diagnostic de configuration réussi !\n\n`;
+                        summary += `📁 Fichier .env: ${diagData.debug.found_path || 'Non trouvé'}\n`;
+                        summary += `🔑 Variables trouvées: ${envVars.length}\n`;
+                        summary += `📋 OPENAI_API_KEY: ${hasOpenAI ? '✅ Présente' : '❌ Manquante'}\n`;
+                        summary += `🏢 OPENAI_ORG_ID: ${hasOrgId ? '✅ Présente' : '⚠️ Manquante (optionnel)'}\n\n`;
+                        summary += `Détails complets:\n${JSON.stringify(diagData, null, 2)}`;
+                        
+                        resultDiv.textContent = summary;
+                        log('✅ Test diagnostic réussi - configuration analysée');
+                        return;
+                    }
+                }
+                
+                // Fallback : test avec auth.php en mode debug
+                log('🔄 Fallback vers auth.php avec mode debug...');
+                
+                const response = await fetch('/api/admin/auth.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        username: 'test', 
+                        password: 'test',
+                        debug: true  // Activer le mode debug
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.debug) {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = `✅ Fichier .env accessible via auth.php !\n\nDébug info:\n${JSON.stringify(data.debug, null, 2)}`;
+                    log('✅ Test .env réussi via auth.php - fichier accessible');
+                } else if (data.valid === false && !data.debug) {
+                    resultDiv.className = 'result warning';
+                    resultDiv.textContent = `⚠️ Mode debug non activé avec identifiants de test.\n\nPour tester la configuration .env, utilisez la page test-auth.html avec vos vrais identifiants admin.\n\nOu modifiez temporairement le code pour inclure les infos de debug.`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = `❌ Pas d'informations de debug disponibles.\n\nRéponse: ${JSON.stringify(data, null, 2)}`;
+                    log('⚠️ Test .env partiellement réussi - pas de debug');
+                }
+
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erreur: ${error.message}`;
+                log(`❌ Erreur test .env: ${error.message}`);
+            }
+        }
+
+        async function testOpenAIUsage() {
+            const resultDiv = document.getElementById('usage-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result loading';
+            resultDiv.textContent = '⏳ Test API OpenAI Usage en cours...';
+            
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            
+            log(`📊 Test API Usage pour la période ${startDate} → ${endDate}`);
+
+            try {
+                const response = await fetch('/api/admin/openai-usage.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        start_date: startDate,
+                        end_date: endDate
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = `✅ API Usage fonctionne !\n\nDonnées récupérées:\n- Source: ${data.source}\n- Période: ${data.period.start_date} → ${data.period.end_date}\n- Requêtes mensuelles: ${data.data.monthlyRequests}\n- Coût mensuel: $${data.data.monthlyCost}\n- Tokens utilisés: ${data.data.tokensUsed}\n\nRéponse complète:\n${JSON.stringify(data, null, 2)}`;
+                    log('✅ Test API Usage réussi - vraies données récupérées !');
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = `❌ Erreur API: ${data.error || 'Erreur inconnue'}\n\nStatut HTTP: ${response.status}\nRéponse: ${JSON.stringify(data, null, 2)}`;
+                    log(`⚠️ Test API Usage échoué: ${data.error || 'Erreur inconnue'}`);
+                }
+
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erreur réseau: ${error.message}`;
+                log(`❌ Erreur réseau test API Usage: ${error.message}`);
+            }
+        }
+
+        async function testBackendConfig() {
+            const resultDiv = document.getElementById('config-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result loading';
+            resultDiv.textContent = '⏳ Test configuration backend...';
+            
+            log('⚙️ Test de la configuration backend');
+
+            try {
+                // Test plusieurs endpoints pour vérifier la configuration
+                const tests = [
+                    { name: 'Auth endpoint', url: '/api/admin/auth.php' },
+                    { name: 'Usage endpoint', url: '/api/admin/openai-usage.php' }
+                ];
+
+                let results = [];
+                
+                for (const test of tests) {
+                    try {
+                        const response = await fetch(test.url, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({})
+                        });
+                        
+                        results.push({
+                            name: test.name,
+                            status: response.status,
+                            accessible: true
+                        });
+                    } catch (error) {
+                        results.push({
+                            name: test.name,
+                            status: 'Error',
+                            accessible: false,
+                            error: error.message
+                        });
+                    }
+                }
+
+                resultDiv.className = 'result success';
+                resultDiv.textContent = `📋 Configuration Backend:\n\n${results.map(r => 
+                    `${r.name}: ${r.accessible ? '✅' : '❌'} (${r.status})`
+                ).join('\n')}\n\nDétails:\n${JSON.stringify(results, null, 2)}`;
+                
+                log('✅ Test configuration backend terminé');
+
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erreur: ${error.message}`;
+                log(`❌ Erreur test configuration: ${error.message}`);
+            }
+        }
+    </script>
+</body>
+</html> 
