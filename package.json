@@ -1,0 +1,55 @@
+{
+  "name": "sobre-ftp-deploy",
+  "version": "1.0.0",
+  "description": "Script de déploiement FTP pour l'application Sobre",
+  "scripts": {
+    "deploy": "node scripts/deploy-simple.js",
+    "deploy:homepage": "node scripts/deploy-simple.js homepage",
+    "deploy:sobre": "node scripts/deploy-simple.js sobre",
+    "deploy:recettes": "node scripts/deploy-simple.js recettes",
+    "deploy:admin": "node scripts/deploy-admin.js",
+    "deploy:all": "node scripts/deploy-simple.js all",
+    "deploy:old": "node scripts/deploy.js",
+    "deploy:multi": "node scripts/deploy-multi.js",
+    "check": "node scripts/check-deployment-files.js",
+    "setup": "npm install",
+    "test": "node test/run-all-tests.js",
+    "test:unit": "node test/run-all-tests.js --suite 'Tests Unitaires'",
+    "test:api": "node test/run-all-tests.js --suite 'Tests API'",
+    "test:ui": "node test/run-all-tests.js --suite 'Tests Fonctionnels UI'",
+    "test:browser": "open test/test-runner.html",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "serve": "npx http-server -p 8080",
+    "serve:test": "TEST_MODE=true npx http-server -p 8080"
+  },
+  "dependencies": {
+    "basic-ftp": "^5.0.3",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.1",
+    "http-server": "^14.1.1",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "playwright": "^1.54.1"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/test/unit/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "sobre/script.js",
+      "recettes/script.js",
+      "admin/script.js",
+      "admin/api.js"
+    ],
+    "coverageDirectory": "test/coverage",
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "html"
+    ]
+  }
+}

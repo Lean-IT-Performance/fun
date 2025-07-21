@@ -1,0 +1,60 @@
+# Configuration principale pour fun.lean-it-performance.fr
+DirectoryIndex index.html index.htm index.php
+
+# Protection du fichier .env (AJOUTÉ pour console admin)
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Protection des fichiers sensibles (AJOUTÉ pour console admin)
+<FilesMatch "\.(env|log|ini|conf|config)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Configuration de compression DEFLATE
+SetOutputFilter DEFLATE
+AddOutputFilterByType DEFLATE "application/atom+xml" "application/javascript" "application/json" "application/ld+json" "application/manifest+json" "application/rdf+xml" "application/rss+xml" "application/schema+json" "application/vnd.geo+json" "application/vnd.ms-fontobject" "application/x-font-ttf" "application/x-javascript" "application/x-web-app-manifest+json" "application/xhtml+xml" "application/xml" "font/eot" "font/opentype" "image/bmp" "image/svg+xml" "image/vnd.microsoft.icon" "image/x-icon" "text/cache-manifest" "text/css" "text/html" "text/javascript" "text/plain" "text/vcard" "text/vnd.rim.location.xloc" "text/vtt" "text/x-component" "text/x-cross-domain-policy" "text/xml"
+
+# Règles de réécriture pour les sous-applications
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# API Admin Auth - Redirection vers le fichier PHP (AJOUTÉ pour console admin)
+RewriteRule ^api/admin/auth/?$ api/admin/auth.php [L,QSA]
+
+# Forcer l'index.html à la racine quand on accède au domaine principal
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{DOCUMENT_ROOT}/index.html -f
+RewriteRule ^$ /index.html [L]
+
+# Redirection pour les sous-dossiers vers leurs index.html respectifs
+RewriteCond %{REQUEST_URI} ^/sobre/?$
+RewriteRule ^sobre/?$ /sobre/index.html [L]
+
+RewriteCond %{REQUEST_URI} ^/recettes/?$
+RewriteRule ^recettes/?$ /recettes/index.html [L]
+
+RewriteCond %{REQUEST_URI} ^/admin/?$
+RewriteRule ^admin/?$ /admin/index.html [L]
+</IfModule>
+
+# En-têtes de sécurité (AJOUTÉ pour console admin)
+<IfModule mod_headers.c>
+    # Sécurité CSP
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.openai.com; img-src 'self' data:;"
+    
+    # Protection contre le clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # Protection XSS
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Protection contre le sniffing MIME
+    Header always set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# SECTION BEGIN GIT PROTECTION
+RedirectMatch 404 /\.git
+# SECTION END GIT PROTECTION

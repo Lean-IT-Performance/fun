@@ -1,0 +1,56 @@
+# Fichiers de configuration sensibles
+.env
+.env.local
+.env.development
+.env.production
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Répertoires de dépendances
+node_modules/
+/.pnp
+.pnp.js
+
+# Fichiers de cache
+.cache/
+.parcel-cache/
+
+# Répertoires de build
+/dist
+/build
+
+# Fichiers IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers temporaires
+*.tmp
+*.temp
+
+# Credentials et clés
+*.key
+*.pem
+credentials.json
+
+# Fichiers de backup
+*.backup
+*.bak
+
+# Répertoires de test
+coverage/
+.coverage
+.nyc_output
+
+# Cache ESLint
+.eslintcache
