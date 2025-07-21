@@ -16,6 +16,7 @@ Fun Lean IT Performance est une collection d'applications web légères, axées 
 2. **[Mes Recettes](./recettes/)** 🍳 - Générateur de recettes intelligent
    - Alimenté par GPT-4o-mini
    - Création de recettes basées sur vos ingrédients disponibles
+   - Fonction locale retiree : generation 100% IA
    - Prise en compte des contraintes alimentaires
 
 3. **[Console Admin](./admin/)** ⚙️ - Monitoring et gestion

@@ -3,6 +3,7 @@
 ## 🎯 Présentation
 
 Le générateur de recettes IA utilise **GPT-4o-mini** pour créer des recettes personnalisées basées sur vos ingrédients disponibles. Le système prend en compte de nombreux paramètres pour générer des recettes adaptées à vos besoins.
+Depuis la version 1.1, la recherche locale a ete retiree au profit d'une generation uniquement par IA.
 
 ## 🔐 Sécurité
 
