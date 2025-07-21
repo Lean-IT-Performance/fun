@@ -135,26 +135,67 @@
 
                 <div class="test-tools-card">
                     <h3>🔧 Outils de Test</h3>
-                    <p>Accéder aux pages de diagnostic et test pour résoudre les problèmes</p>
-                    <div class="test-links">
-                        <a href="test-auth.html" class="test-link" target="_blank" rel="noopener">
-                            <div class="test-icon">🔐</div>
-                            <div class="test-info">
-                                <div class="test-title">Test Authentification</div>
-                                <div class="test-desc">Vérifier l'authentification admin et les variables d'environnement</div>
-                            </div>
-                        </a>
-                        
-                        <a href="test-backend.html" class="test-link" target="_blank" rel="noopener">
-                            <div class="test-icon">🧪</div>
-                            <div class="test-info">
-                                <div class="test-title">Test Backend OpenAI</div>
-                                <div class="test-desc">Tester l'endpoint backend et l'API Usage d'OpenAI</div>
-                            </div>
-                        </a>
+                    <p>Ces outils permettent de diagnostiquer la configuration et le backend directement depuis cette page.</p>
+
+                    <div class="test-section">
+                        <h4>1. Test Endpoint d'Authentification</h4>
+                        <input type="text" id="test-username" placeholder="Username">
+                        <input type="password" id="test-password" placeholder="Password">
+                        <button onclick="testAuthEndpoint()">Tester Auth</button>
+                        <div id="auth-result" class="result"></div>
                     </div>
-                    <div class="test-note">
-                        💡 <strong>Conseil :</strong> Utilisez ces outils si vous rencontrez des problèmes de connexion ou de données.
+
+                    <div class="test-section">
+                        <h4>2. Test Variables d'Environnement</h4>
+                        <button onclick="testEnvVars()">Vérifier .env</button>
+                        <div id="env-result-auth" class="result"></div>
+                    </div>
+
+                    <div class="test-section">
+                        <h4>3. Test Connexion OpenAI</h4>
+                        <button onclick="testOpenAIConnection()">Tester OpenAI</button>
+                        <div id="openai-result" class="result"></div>
+                    </div>
+
+                    <div class="test-section">
+                        <h4>4. Test Stockage Local</h4>
+                        <button onclick="testLocalStorage()">Tester Storage</button>
+                        <button onclick="clearLocalStorage()">Vider Storage</button>
+                        <div id="storage-result" class="result"></div>
+                    </div>
+
+                    <div class="test-section">
+                        <h4>5. Actions Utiles</h4>
+                        <button onclick="generateTestData()">Générer Données Test</button>
+                        <button onclick="clearAllData()">Tout Vider</button>
+                        <button onclick="showDebugInfo()">Info Debug</button>
+                    </div>
+
+                    <div class="test-section">
+                        <h4>6. Diagnostic de la configuration</h4>
+                        <button onclick="testEnvFile()">Lancer le diagnostic</button>
+                        <div id="env-result-backend" class="result" style="display:none;"></div>
+                    </div>
+
+                    <div class="test-section">
+                        <h4>7. Endpoint de facturation OpenAI</h4>
+                        <label>Date début:</label>
+                        <input type="date" id="start-date">
+                        <label>Date fin:</label>
+                        <input type="date" id="end-date">
+                        <button onclick="testOpenAIUsage()">Tester l'API de facturation</button>
+                        <div id="usage-result" class="result" style="display:none;"></div>
+                    </div>
+
+                    <div class="test-section">
+                        <h4>8. Test Configuration Backend</h4>
+                        <button onclick="testBackendConfig()">Tester le Backend</button>
+                        <div id="config-result" class="result" style="display:none;"></div>
+                    </div>
+
+                    <div class="test-section">
+                        <h4>Logs de Debug</h4>
+                        <div id="debug-logs" class="result">Prêt pour les tests...</div>
                     </div>
                 </div>
             </section>

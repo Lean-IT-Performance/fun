@@ -944,3 +944,305 @@ class AdminConsole {
 document.addEventListener('DOMContentLoaded', () => {
     new AdminConsole();
 });
+
+// --- Fonctions de test rapatriées des pages dédiées ---
+
+async function testAuthEndpoint() {
+    const username = document.getElementById('test-username').value;
+    const password = document.getElementById('test-password').value;
+    const resultDiv = document.getElementById('auth-result');
+
+    resultDiv.textContent = '⏳ Test en cours...';
+    resultDiv.className = 'result warning';
+
+    try {
+        const response = await fetch('/api/admin/auth.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.valid) {
+            resultDiv.textContent = `✅ AUTH SUCCESS:\n${JSON.stringify(result, null, 2)}`;
+            resultDiv.className = 'result success';
+        } else {
+            resultDiv.textContent = `❌ AUTH FAILED:\n${JSON.stringify(result, null, 2)}`;
+            resultDiv.className = 'result error';
+        }
+    } catch (error) {
+        resultDiv.textContent = `💥 ENDPOINT ERROR:\n${error.message}\n\n⚠️ L'endpoint PHP n'est peut-être pas configuré sur ce serveur.`;
+        resultDiv.className = 'result error';
+    }
+}
+
+async function testEnvVars() {
+    const resultDiv = document.getElementById('env-result-auth');
+    resultDiv.textContent = '⏳ Vérification via l\'endpoint de diagnostic...';
+    resultDiv.className = 'result warning';
+
+    try {
+        const diagResponse = await fetch('/api/admin/config-test.php');
+        if (!diagResponse.ok) throw new Error(`Erreur HTTP: ${diagResponse.status}`);
+        const diagData = await diagResponse.json();
+
+        if (diagData.success && diagData.debug) {
+            const envVars = diagData.debug.env_vars_found || [];
+            const hasAdminUser = envVars.some(v => v.key === 'ADMIN_USERNAME');
+            const hasAdminPass = envVars.some(v => v.key === 'ADMIN_PASSWORD');
+
+            let summary = `✅ Diagnostic de configuration réussi !\n\n`;
+            summary += `📁 Fichier .env: ${diagData.debug.found_path || 'Non trouvé'}\n`;
+            summary += `🔑 Variables trouvées: ${envVars.length}\n`;
+            summary += `👤 ADMIN_USERNAME: ${hasAdminUser ? '✅ Présente' : '❌ Manquante'}\n`;
+            summary += `🔑 ADMIN_PASSWORD: ${hasAdminPass ? '✅ Présente' : '❌ Manquante'}\n\n`;
+            summary += `Détails complets:\n${JSON.stringify(diagData.debug, null, 2)}`;
+
+            resultDiv.textContent = summary;
+            resultDiv.className = 'result success';
+        } else {
+            throw new Error('Réponse de diagnostic invalide');
+        }
+    } catch (error) {
+        resultDiv.textContent = `❌ ENV TEST FAILED:\n${error.message}\n\nActions à faire:\n1. Vérifier que /api/admin/config-test.php est accessible\n2. Vérifier les logs du serveur PHP`;
+        resultDiv.className = 'result error';
+    }
+}
+
+async function testOpenAIConnection() {
+    const resultDiv = document.getElementById('openai-result');
+    resultDiv.textContent = '⏳ Test connexion OpenAI...';
+    resultDiv.className = 'result warning';
+
+    try {
+        const response = await fetch('/api/admin/config-test.php');
+        const data = await response.json();
+
+        if (data.debug && data.debug.php_functions.curl_init) {
+            resultDiv.textContent = '✅ CONNECTIVITÉ OK:\nLa fonction cURL est disponible. Le backend peut faire des requêtes externes.';
+            resultDiv.className = 'result success';
+        } else {
+            resultDiv.textContent = '⚠️ CONNECTIVITÉ PARTIELLE:\nLa fonction cURL n\'est pas disponible. Le backend pourrait avoir des problèmes pour contacter OpenAI.';
+            resultDiv.className = 'result warning';
+        }
+    } catch (error) {
+        resultDiv.textContent = `❌ TEST CONNECTIVITÉ FAILED:\n${error.message}`;
+        resultDiv.className = 'result error';
+    }
+}
+
+function testLocalStorage() {
+    const resultDiv = document.getElementById('storage-result');
+
+    try {
+        const testData = { test: 'value', timestamp: new Date().toISOString() };
+        localStorage.setItem('admin_test', JSON.stringify(testData));
+        const retrieved = JSON.parse(localStorage.getItem('admin_test'));
+
+        if (retrieved && retrieved.test === 'value') {
+            resultDiv.textContent = `✅ LOCALSTORAGE OK:\nÉcriture et lecture fonctionnelles.\n\nDonnées actuelles:\n${JSON.stringify(retrieved, null, 2)}`;
+            resultDiv.className = 'result success';
+        } else {
+            throw new Error('Données corrompues');
+        }
+    } catch (error) {
+        resultDiv.textContent = `❌ LOCALSTORAGE FAILED:\n${error.message}`;
+        resultDiv.className = 'result error';
+    }
+}
+
+function clearLocalStorage() {
+    localStorage.removeItem('admin_test');
+    localStorage.removeItem('openai_usage_data');
+    localStorage.removeItem('admin_settings');
+    const resultDiv = document.getElementById('storage-result');
+    resultDiv.textContent = '🗑️ Storage vidé.';
+    resultDiv.className = 'result warning';
+}
+
+function generateTestData() {
+    const today = new Date().toISOString().split('T')[0];
+    const testUsageData = {};
+    for (let i = 6; i >= 0; i--) {
+        const date = new Date();
+        date.setDate(date.getDate() - i);
+        const dateStr = date.toISOString().split('T')[0];
+        testUsageData[dateStr] = {
+            requests: Math.floor(Math.random() * 20) + 5,
+            tokens: Math.floor(Math.random() * 5000) + 1000,
+            cost: Math.random() * 2 + 0.5,
+            models: { 'gpt-4o-mini': Math.floor(Math.random() * 15) + 3, 'gpt-4': Math.floor(Math.random() * 3) + 1 }
+        };
+    }
+
+    localStorage.setItem('openai_usage_data', JSON.stringify(testUsageData));
+    const resultDiv = document.getElementById('storage-result');
+    resultDiv.textContent = `✅ DONNÉES TEST GÉNÉRÉES:\n7 jours de données simulées créées.\n\nAu total: ${Object.keys(testUsageData).length} jours`;
+    resultDiv.className = 'result success';
+}
+
+function clearAllData() {
+    localStorage.clear();
+    sessionStorage.clear();
+    alert('🗑️ Toutes les données locales ont été vidées.');
+}
+
+function showDebugInfo() {
+    const debugInfo = {
+        userAgent: navigator.userAgent,
+        localStorage: !!window.localStorage,
+        sessionStorage: !!window.sessionStorage,
+        fetch: !!window.fetch,
+        currentURL: window.location.href,
+        storedData: {
+            admin_settings: localStorage.getItem('admin_settings'),
+            usage_data: localStorage.getItem('openai_usage_data') ? 'Present' : 'None'
+        }
+    };
+    console.log('DEBUG INFO:', debugInfo);
+    alert('📋 Informations de debug affichées dans la console');
+}
+
+function log(message) {
+    const logs = document.getElementById('debug-logs');
+    const timestamp = new Date().toLocaleTimeString();
+    logs.textContent += `[${timestamp}] ${message}\n`;
+    logs.scrollTop = logs.scrollHeight;
+}
+
+async function testEnvFile() {
+    const resultDiv = document.getElementById('env-result-backend');
+    resultDiv.style.display = 'block';
+    resultDiv.className = 'result loading';
+    resultDiv.textContent = '⏳ Test en cours...';
+
+    log('🔧 Début du test des variables d\'environnement');
+
+    try {
+        log('🔬 Test avec endpoint de diagnostic spécialisé...');
+        const diagResponse = await fetch('/api/admin/config-test.php', { method: 'GET', headers: { 'Content-Type': 'application/json' } });
+        if (diagResponse.ok) {
+            const diagData = await diagResponse.json();
+            if (diagData.success && diagData.debug) {
+                resultDiv.className = 'result success';
+                const envVars = diagData.debug.env_vars_found || [];
+                const hasOpenAI = envVars.some(v => v.key === 'OPENAI_API_KEY');
+                const hasOrgId = envVars.some(v => v.key === 'OPENAI_ORG_ID');
+                let summary = `✅ Diagnostic de configuration réussi !\n\n`;
+                summary += `📁 Fichier .env: ${diagData.debug.found_path || 'Non trouvé'}\n`;
+                summary += `🔑 Variables trouvées: ${envVars.length}\n`;
+                summary += `📋 OPENAI_API_KEY: ${hasOpenAI ? '✅ Présente' : '❌ Manquante'}\n`;
+                summary += `🏢 OPENAI_ORG_ID: ${hasOrgId ? '✅ Présente' : '⚠️ Manquante (optionnel)'}\n\n`;
+                summary += `Détails complets:\n${JSON.stringify(diagData, null, 2)}`;
+                resultDiv.textContent = summary;
+                log('✅ Test diagnostic réussi - configuration analysée');
+                return;
+            }
+        }
+
+        log('🔄 Fallback vers auth.php avec mode debug...');
+        const response = await fetch('/api/admin/auth.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: 'test', password: 'test', debug: true })
+        });
+        const data = await response.json();
+        if (data.debug) {
+            resultDiv.className = 'result success';
+            resultDiv.textContent = `✅ Fichier .env accessible via auth.php !\n\nDébug info:\n${JSON.stringify(data.debug, null, 2)}`;
+            log('✅ Test .env réussi via auth.php - fichier accessible');
+        } else if (data.valid === false && !data.debug) {
+            resultDiv.className = 'result warning';
+            resultDiv.textContent = `⚠️ Mode debug non activé avec identifiants de test.\n\nPour tester la configuration .env, utilisez un compte admin valide.`;
+        } else {
+            resultDiv.className = 'result error';
+            resultDiv.textContent = `❌ Pas d'informations de debug disponibles.\n\nRéponse: ${JSON.stringify(data, null, 2)}`;
+            log('⚠️ Test .env partiellement réussi - pas de debug');
+        }
+    } catch (error) {
+        resultDiv.className = 'result error';
+        resultDiv.textContent = `❌ Erreur: ${error.message}`;
+        log(`❌ Erreur test .env: ${error.message}`);
+    }
+}
+
+async function testOpenAIUsage() {
+    const resultDiv = document.getElementById('usage-result');
+    resultDiv.style.display = 'block';
+    resultDiv.className = 'result loading';
+    resultDiv.textContent = '⏳ Test API OpenAI Usage en cours...';
+
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+
+    log(`📊 Test API Usage pour la période ${startDate} → ${endDate}`);
+
+    try {
+        const headers = { 'Content-Type': 'application/json' };
+        const authToken = sessionStorage.getItem('admin_auth_token');
+        if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+
+        const response = await fetch('/api/admin/openai-usage.php', {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ start_date: startDate, end_date: endDate })
+        });
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            resultDiv.className = 'result success';
+            resultDiv.textContent = `✅ API Usage fonctionne !\n\nDonnées récupérées:\n- Source: ${data.source}\n- Période: ${data.period.start_date} → ${data.period.end_date}\n- Requêtes mensuelles: ${data.data.monthlyRequests}\n- Coût mensuel: $${data.data.monthlyCost}\n- Tokens utilisés: ${data.data.tokensUsed}\n\nRéponse complète:\n${JSON.stringify(data, null, 2)}`;
+            log('✅ Test API Usage réussi - vraies données récupérées !');
+        } else {
+            resultDiv.className = 'result error';
+            resultDiv.textContent = `❌ Erreur API: ${data.error || 'Erreur inconnue'}\n\nStatut HTTP: ${response.status}\nRéponse: ${JSON.stringify(data, null, 2)}`;
+            log(`⚠️ Test API Usage échoué: ${data.error || 'Erreur inconnue'}`);
+        }
+    } catch (error) {
+        resultDiv.className = 'result error';
+        resultDiv.textContent = `❌ Erreur réseau: ${error.message}`;
+        log(`❌ Erreur réseau test API Usage: ${error.message}`);
+    }
+}
+
+async function testBackendConfig() {
+    const resultDiv = document.getElementById('config-result');
+    resultDiv.style.display = 'block';
+    resultDiv.className = 'result loading';
+    resultDiv.textContent = '⏳ Test configuration backend...';
+
+    log('⚙️ Test de la configuration backend');
+
+    try {
+        const tests = [
+            { name: 'Auth endpoint', url: '/api/admin/auth.php' },
+            { name: 'Usage endpoint', url: '/api/admin/openai-usage.php' }
+        ];
+
+        let results = [];
+
+        for (const test of tests) {
+            try {
+                const headers = { 'Content-Type': 'application/json' };
+                if (test.url.includes('openai-usage.php')) {
+                    const authToken = sessionStorage.getItem('admin_auth_token');
+                    if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+                }
+
+                const response = await fetch(test.url, { method: 'POST', headers, body: JSON.stringify({}) });
+                results.push({ name: test.name, status: response.status, accessible: true });
+            } catch (error) {
+                results.push({ name: test.name, status: 'Error', accessible: false, error: error.message });
+            }
+        }
+
+        resultDiv.className = 'result success';
+        resultDiv.textContent = `📋 Configuration Backend:\n\n${results.map(r => `${r.name}: ${r.accessible ? '✅' : '❌'} (${r.status})`).join('\n')}\n\nDétails:\n${JSON.stringify(results, null, 2)}`;
+        log('✅ Test configuration backend terminé');
+    } catch (error) {
+        resultDiv.className = 'result error';
+        resultDiv.textContent = `❌ Erreur: ${error.message}`;
+        log(`❌ Erreur test configuration: ${error.message}`);
+    }
+}

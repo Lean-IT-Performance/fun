@@ -1077,4 +1077,28 @@ main {
         height: 50px;
         font-size: 1.5rem;
     }
-} 
+}
+
+/* Styles pour les tests intégrés */
+.test-section {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.result {
+    background: #f9f9f9;
+    border: 1px solid var(--border);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 12px;
+    white-space: pre-wrap;
+}
+
+.result.success { background: #dcfce7; border-color: #bbf7d0; }
+.result.error { background: #fee2e2; border-color: #fecaca; }
+.result.warning { background: #fef3c7; border-color: #fde68a; }
+.result.loading { background: #fff7ed; border-color: #fed7aa; }
