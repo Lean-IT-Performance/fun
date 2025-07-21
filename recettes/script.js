@@ -4,6 +4,7 @@ class RecipeGenerator {
         this.serviceWorkerReady = false;
         this.currentSuggestions = [];
         this.configManager = null;
+        this.openaiModel = 'gpt-4o-mini';
         this.parameters = {
             convives: 4,
             typePublic: 'adultes',
@@ -176,13 +177,21 @@ class RecipeGenerator {
             if (typeof ConfigManager !== 'undefined') {
                 this.configManager = new ConfigManager();
                 await this.configManager.loadConfig();
-                
+
                 const validation = this.configManager.validateConfig();
                 if (!validation.isValid) {
                     console.warn('⚠️ Configuration invalide:', validation.errors);
                 }
+
+                const confModel = this.configManager.getOpenAIConfig().model;
+                const saved = localStorage.getItem('recettes_openai_model');
+                this.openaiModel = saved || confModel || this.openaiModel;
             } else {
                 console.warn('⚠️ ConfigManager non disponible, utilisation des fallbacks');
+                const saved = localStorage.getItem('recettes_openai_model');
+                if (saved) {
+                    this.openaiModel = saved;
+                }
             }
         } catch (error) {
             console.error('❌ Erreur initialisation config:', error);
@@ -518,7 +527,8 @@ class RecipeGenerator {
             tempsDisponible: this.sanitizeInput(this.parameters.tempsDisponible),
             typeRepas: this.sanitizeInput(this.parameters.typeRepas),
             materiel: this.parameters.materiel.map(m => this.sanitizeInput(m)),
-            mode: 'suggestions'
+            mode: 'suggestions',
+            model: this.openaiModel
         };
 
         // Valider les données
@@ -569,9 +579,9 @@ class RecipeGenerator {
             
             // Log de l'usage pour l'admin
             this.logUsageToAdmin({
-                model: 'gpt-4o-mini',
+                model: this.openaiModel,
                 tokens: result.usage?.total_tokens || 800, // Estimation si pas de données
-                cost: this.calculateCost(result.usage?.total_tokens || 800, 'gpt-4o-mini'),
+                cost: this.calculateCost(result.usage?.total_tokens || 800, this.openaiModel),
                 status: 'success',
                 type: 'suggestions'
             });
@@ -582,7 +592,7 @@ class RecipeGenerator {
             
             // Log de l'erreur pour l'admin
             this.logUsageToAdmin({
-                model: 'gpt-4o-mini',
+                model: this.openaiModel,
                 tokens: 0,
                 cost: 0,
                 status: 'error',
@@ -703,7 +713,8 @@ class RecipeGenerator {
                 typeRepas: this.parameters.typeRepas,
                 materiel: this.parameters.materiel,
                 mode: 'detailed',
-                chosenRecipe: suggestion.nom
+                chosenRecipe: suggestion.nom,
+                model: this.openaiModel
             };
 
             console.log('Génération de la recette détaillée:', requestData);
@@ -740,9 +751,9 @@ class RecipeGenerator {
             
             // Log de l'usage pour l'admin
             this.logUsageToAdmin({
-                model: 'gpt-4o-mini',
+                model: this.openaiModel,
                 tokens: result.usage?.total_tokens || 1200, // Estimation pour recette détaillée
-                cost: this.calculateCost(result.usage?.total_tokens || 1200, 'gpt-4o-mini'),
+                cost: this.calculateCost(result.usage?.total_tokens || 1200, this.openaiModel),
                 status: 'success',
                 type: 'detailed_recipe'
             });
@@ -753,7 +764,7 @@ class RecipeGenerator {
             
             // Log de l'erreur pour l'admin
             this.logUsageToAdmin({
-                model: 'gpt-4o-mini',
+                model: this.openaiModel,
                 tokens: 0,
                 cost: 0,
                 status: 'error',

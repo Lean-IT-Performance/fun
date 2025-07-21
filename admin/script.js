@@ -74,6 +74,11 @@ class AdminConsole {
             chartPeriod.addEventListener('change', (e) => this.updateChartsData(e.target.value));
         }
 
+        const saveModelBtn = document.getElementById('save-recipe-model');
+        if (saveModelBtn) {
+            saveModelBtn.addEventListener('click', () => this.saveModelSetting());
+        }
+
         // Initialiser les contrôles de date par défaut
         this.initializeDateControls();
     }
@@ -904,6 +909,25 @@ class AdminConsole {
                 document.body.removeChild(notification);
             }, 300);
         }, 3000);
+    }
+
+    loadSettings() {
+        const select = document.getElementById('recipe-model-select');
+        if (select) {
+            const saved = localStorage.getItem('recettes_openai_model');
+            if (saved) {
+                select.value = saved;
+            }
+        }
+    }
+
+    saveModelSetting() {
+        const select = document.getElementById('recipe-model-select');
+        if (select) {
+            const value = select.value;
+            localStorage.setItem('recettes_openai_model', value);
+            this.showNotification('✅ Modèle enregistré', 'success');
+        }
     }
 
     formatNumber(num) {

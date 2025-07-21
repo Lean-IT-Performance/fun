@@ -97,10 +97,16 @@ try {
     // Construire les prompts
     $systemPrompt = getSystemPrompt($sanitizedData['mode']);
     $userPrompt = buildRecipePrompt($sanitizedData);
+
+    $allowedModels = ['gpt-4o-mini', 'gpt-4', 'gpt-3.5-turbo'];
+    $selectedModel = $sanitizedData['model'];
+    if (!$selectedModel || !in_array($selectedModel, $allowedModels)) {
+        $selectedModel = $envVars['OPENAI_MODEL'] ?? 'gpt-4o-mini';
+    }
     
     // Préparer la requête vers OpenAI
     $openaiRequest = [
-        'model' => 'gpt-4o-mini',
+        'model' => $selectedModel,
         'messages' => [
             [
                 'role' => 'system',
@@ -127,7 +133,7 @@ try {
     
     // Log de l'usage (optionnel)
     logAPIUsage([
-        'model' => 'gpt-4o-mini',
+        'model' => $selectedModel,
         'tokens' => $response['data']['usage']['total_tokens'] ?? 0,
         'mode' => $sanitizedData['mode'],
         'timestamp' => date('Y-m-d H:i:s'),
@@ -186,6 +192,11 @@ function validateRequestData($data) {
             $errors[] = 'Contraintes non autorisées: ' . implode(', ', $invalidConstraints);
         }
     }
+
+    $allowedModels = ['gpt-4o-mini', 'gpt-4', 'gpt-3.5-turbo'];
+    if (isset($data['model']) && !in_array($data['model'], $allowedModels)) {
+        $errors[] = 'Modèle OpenAI invalide';
+    }
     
     return [
         'isValid' => empty($errors),
@@ -239,7 +250,11 @@ function sanitizeRequestData($data) {
             }
         }
     }
-    
+
+    $allowedModels = ['gpt-4o-mini', 'gpt-4', 'gpt-3.5-turbo'];
+    $model = sanitizeString($data['model'] ?? '');
+    $sanitized['model'] = in_array($model, $allowedModels) ? $model : null;
+
     return $sanitized;
 }
 

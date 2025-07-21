@@ -496,6 +496,14 @@ main {
     font-size: 0.9rem;
 }
 
+.setting-item select {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background: var(--surface);
+}
+
 .setting-item input[type="checkbox"] {
     width: auto;
     transform: scale(1.2);
