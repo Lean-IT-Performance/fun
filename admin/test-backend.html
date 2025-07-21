@@ -269,9 +269,15 @@
             log(`📊 Test API Usage pour la période ${startDate} → ${endDate}`);
 
             try {
+                const headers = { 'Content-Type': 'application/json' };
+                const authToken = sessionStorage.getItem('admin_auth_token');
+                if (authToken) {
+                    headers['Authorization'] = `Bearer ${authToken}`;
+                }
+
                 const response = await fetch('/api/admin/openai-usage.php', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers,
                     body: JSON.stringify({
                         start_date: startDate,
                         end_date: endDate
@@ -316,9 +322,17 @@
                 
                 for (const test of tests) {
                     try {
+                        const headers = { 'Content-Type': 'application/json' };
+                        if (test.url.includes('openai-usage.php')) {
+                            const authToken = sessionStorage.getItem('admin_auth_token');
+                            if (authToken) {
+                                headers['Authorization'] = `Bearer ${authToken}`;
+                            }
+                        }
+
                         const response = await fetch(test.url, {
                             method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
+                            headers,
                             body: JSON.stringify({})
                         });
                         
