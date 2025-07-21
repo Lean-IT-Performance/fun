@@ -15,151 +15,6 @@ class RecipeGenerator {
             materiel: ['four', 'plaques']
         };
         
-        this.recipeDatabase = [
-            {
-                name: "Omelette aux herbes",
-                emoji: "🍳",
-                description: "Une omelette moelleuse parfumée aux herbes fraîches",
-                time: "10 min",
-                difficulty: "Facile",
-                ingredients: ["œufs", "herbes", "beurre", "sel", "poivre"],
-                instructions: [
-                    "Battez 3 œufs dans un bol avec du sel et du poivre",
-                    "Hachez finement les herbes fraîches",
-                    "Chauffez le beurre dans une poêle antiadhésive",
-                    "Versez les œufs et laissez cuire 2 minutes",
-                    "Ajoutez les herbes et pliez l'omelette en deux",
-                    "Servez immédiatement"
-                ],
-                tags: ["quick", "vegetarian"],
-                requiredIngredients: ["œufs"]
-            },
-            {
-                name: "Pâtes au fromage",
-                emoji: "🍝",
-                description: "Des pâtes crémeuses au fromage fondu",
-                time: "15 min",
-                difficulty: "Facile",
-                ingredients: ["pâtes", "fromage", "beurre", "crème", "poivre"],
-                instructions: [
-                    "Faites cuire les pâtes selon les instructions du paquet",
-                    "Dans une casserole, faites fondre le beurre",
-                    "Ajoutez la crème et le fromage râpé",
-                    "Mélangez jusqu'à obtenir une sauce lisse",
-                    "Incorporez les pâtes égouttées",
-                    "Poivrez et servez chaud"
-                ],
-                tags: ["quick", "vegetarian"],
-                requiredIngredients: ["pâtes", "fromage"]
-            },
-            {
-                name: "Salade de tomates",
-                emoji: "🥗",
-                description: "Salade fraîche de tomates à l'huile d'olive",
-                time: "5 min",
-                difficulty: "Très facile",
-                ingredients: ["tomates", "huile d'olive", "basilic", "sel", "poivre"],
-                instructions: [
-                    "Lavez et coupez les tomates en tranches",
-                    "Disposez sur une assiette",
-                    "Assaisonnez avec l'huile d'olive, sel et poivre",
-                    "Décorez avec les feuilles de basilic",
-                    "Laissez reposer 10 minutes avant de servir"
-                ],
-                tags: ["quick", "vegetarian", "healthy"],
-                requiredIngredients: ["tomates"]
-            },
-            {
-                name: "Riz au poulet",
-                emoji: "🍚",
-                description: "Plat complet avec du riz parfumé et du poulet tendre",
-                time: "30 min",
-                difficulty: "Moyen",
-                ingredients: ["riz", "poulet", "oignons", "ail", "bouillon", "épices"],
-                instructions: [
-                    "Coupez le poulet en morceaux et les oignons",
-                    "Faites revenir le poulet dans une poêle",
-                    "Ajoutez les oignons et l'ail haché",
-                    "Incorporez le riz et mélangez 2 minutes",
-                    "Versez le bouillon chaud et les épices",
-                    "Laissez mijoter 20 minutes à couvert"
-                ],
-                tags: ["healthy"],
-                requiredIngredients: ["riz", "poulet"]
-            },
-            {
-                name: "Gratin de pommes de terre",
-                emoji: "🥔",
-                description: "Gratin crémeux et doré au four",
-                time: "45 min",
-                difficulty: "Moyen",
-                ingredients: ["pommes de terre", "crème", "fromage", "ail", "muscade"],
-                instructions: [
-                    "Épluchez et coupez les pommes de terre en fines lamelles",
-                    "Frottez un plat à gratin avec de l'ail",
-                    "Disposez les pommes de terre en couches",
-                    "Mélangez la crème avec sel, poivre et muscade",
-                    "Versez sur les pommes de terre et parsemez de fromage",
-                    "Enfournez 45 min à 180°C"
-                ],
-                tags: ["vegetarian"],
-                requiredIngredients: ["pommes de terre", "fromage"]
-            },
-            {
-                name: "Soupe à l'oignon",
-                emoji: "🍜",
-                description: "Soupe réconfortante aux oignons caramélisés",
-                time: "40 min",
-                difficulty: "Moyen",
-                ingredients: ["oignons", "bouillon", "fromage", "pain", "beurre", "vin blanc"],
-                instructions: [
-                    "Émincez finement les oignons",
-                    "Faites-les caraméliser dans le beurre pendant 20 min",
-                    "Ajoutez un peu de vin blanc et laissez réduire",
-                    "Versez le bouillon et laissez mijoter 15 min",
-                    "Versez dans des bols, ajoutez le pain et le fromage",
-                    "Passez sous le grill quelques minutes"
-                ],
-                tags: ["vegetarian"],
-                requiredIngredients: ["oignons"]
-            },
-            {
-                name: "Salade de pommes de terre",
-                emoji: "🥔",
-                description: "Salade tiède de pommes de terre aux herbes",
-                time: "25 min",
-                difficulty: "Facile",
-                ingredients: ["pommes de terre", "herbes", "huile d'olive", "vinaigre", "moutarde"],
-                instructions: [
-                    "Faites cuire les pommes de terre à l'eau salée",
-                    "Coupez-les en rondelles encore tièdes",
-                    "Préparez une vinaigrette avec huile, vinaigre et moutarde",
-                    "Versez sur les pommes de terre",
-                    "Ajoutez les herbes hachées",
-                    "Mélangez délicatement et servez tiède"
-                ],
-                tags: ["vegetarian", "healthy"],
-                requiredIngredients: ["pommes de terre"]
-            },
-            {
-                name: "Quiche aux œufs et fromage",
-                emoji: "🥧",
-                description: "Quiche onctueuse aux œufs et fromage",
-                time: "50 min",
-                difficulty: "Moyen",
-                ingredients: ["œufs", "fromage", "crème", "pâte brisée", "muscade"],
-                instructions: [
-                    "Étalez la pâte dans un moule à tarte",
-                    "Battez les œufs avec la crème",
-                    "Ajoutez le fromage râpé et la muscade",
-                    "Versez le mélange sur la pâte",
-                    "Enfournez 35 min à 180°C",
-                    "Laissez reposer 5 min avant de démouler"
-                ],
-                tags: ["vegetarian"],
-                requiredIngredients: ["œufs", "fromage"]
-            }
-        ];
         
         this.init();
     }
@@ -167,7 +22,7 @@ class RecipeGenerator {
     async init() {
         await this.initConfig();
         this.bindEvents();
-        this.updateFindButton();
+        this.updateAIButton();
         await this.initServiceWorker();
     }
 
@@ -229,21 +84,6 @@ class RecipeGenerator {
             });
         });
         
-        // Filtres
-        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                this.filters[checkbox.id] = checkbox.checked;
-            });
-        });
-        
-        // Boutons de recherche
-        document.getElementById('find-recipes').addEventListener('click', () => {
-            this.findRecipes();
-        });
-
-        document.getElementById('generate-ai-recipe').addEventListener('click', () => {
-            this.generateAIRecipe();
-        });
 
         // Gestion des paramètres avancés
         this.bindAdvancedOptions();
@@ -336,13 +176,13 @@ class RecipeGenerator {
     addIngredientToList(ingredient) {
         this.ingredients.push(ingredient);
         this.renderIngredients();
-        this.updateFindButton();
+        this.updateAIButton();
     }
     
     removeIngredient(ingredient) {
         this.ingredients = this.ingredients.filter(ing => ing !== ingredient);
         this.renderIngredients();
-        this.updateFindButton();
+        this.updateAIButton();
         
         // Réactiver le bouton de suggestion correspondant
         document.querySelectorAll('.suggestion-btn').forEach(btn => {
@@ -368,145 +208,6 @@ class RecipeGenerator {
         }
     }
     
-    updateFindButton() {
-        const findBtn = document.getElementById('find-recipes');
-        findBtn.disabled = this.ingredients.length === 0;
-        this.updateAIButton();
-    }
-    
-    findRecipes() {
-        // Afficher l'état de chargement
-        this.showLoading();
-        
-        // Simuler un délai de recherche
-        setTimeout(() => {
-            const matchingRecipes = this.getMatchingRecipes();
-            this.displayRecipes(matchingRecipes);
-        }, 1000);
-    }
-    
-    getMatchingRecipes() {
-        return this.recipeDatabase.filter(recipe => {
-            // Vérifier si au moins un ingrédient requis est disponible
-            const hasRequiredIngredient = recipe.requiredIngredients.some(required => 
-                this.ingredients.some(ingredient => ingredient.includes(required) || required.includes(ingredient))
-            );
-            
-            if (!hasRequiredIngredient) return false;
-            
-            // Appliquer les filtres
-            if (this.filters.vegetarian && !recipe.tags.includes('vegetarian')) return false;
-            if (this.filters.quick && !recipe.tags.includes('quick')) return false;
-            if (this.filters.healthy && !recipe.tags.includes('healthy')) return false;
-            
-            return true;
-        }).sort((a, b) => {
-            // Trier par nombre d'ingrédients correspondants
-            const aMatches = a.ingredients.filter(ing => 
-                this.ingredients.some(userIng => userIng.includes(ing) || ing.includes(userIng))
-            ).length;
-            const bMatches = b.ingredients.filter(ing => 
-                this.ingredients.some(userIng => userIng.includes(ing) || ing.includes(userIng))
-            ).length;
-            
-            return bMatches - aMatches;
-        });
-    }
-    
-    showLoading() {
-        const recipesSection = document.getElementById('recipes-section');
-        const container = document.getElementById('recipes-container');
-        
-        recipesSection.style.display = 'block';
-        container.innerHTML = `
-            <div class="loading">
-                <div class="loading-spinner"></div>
-                <p>Recherche de recettes en cours...</p>
-            </div>
-        `;
-        
-        recipesSection.scrollIntoView({ behavior: 'smooth' });
-    }
-    
-    displayRecipes(recipes) {
-        const container = document.getElementById('recipes-container');
-        
-        if (recipes.length === 0) {
-            container.innerHTML = `
-                <div class="no-results">
-                    <h3>😕 Aucune recette trouvée</h3>
-                    <p>Essayez d'ajouter plus d'ingrédients ou de modifier vos filtres</p>
-                </div>
-            `;
-        } else {
-            container.innerHTML = recipes.map((recipe, index) => `
-                <div class="recipe-card" onclick="recipeApp.showRecipeDetails(${index}, ${JSON.stringify(recipe).replace(/"/g, '&quot;')})">
-                    <div class="recipe-image">
-                        ${recipe.emoji}
-                    </div>
-                    <div class="recipe-content">
-                        <h3 class="recipe-title">${recipe.name}</h3>
-                        <p class="recipe-description">${recipe.description}</p>
-                        <div class="recipe-meta">
-                            <span class="recipe-time">⏱️ ${recipe.time}</span>
-                            <span class="recipe-difficulty">📊 ${recipe.difficulty}</span>
-                        </div>
-                        <div class="recipe-ingredients-preview">
-                            ${recipe.ingredients.slice(0, 3).map(ing => 
-                                `<span class="ingredient-preview">${ing}</span>`
-                            ).join('')}
-                            ${recipe.ingredients.length > 3 ? `<span class="ingredient-preview">+${recipe.ingredients.length - 3}</span>` : ''}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-    }
-    
-    showRecipeDetails(index, recipe) {
-        const modal = document.getElementById('recipe-modal');
-        const details = document.getElementById('recipe-details');
-        
-        const missingIngredients = recipe.ingredients.filter(ing => 
-            !this.ingredients.some(userIng => userIng.includes(ing) || ing.includes(userIng))
-        );
-        
-        details.innerHTML = `
-            <h2>${recipe.emoji} ${recipe.name}</h2>
-            <p class="recipe-description">${recipe.description}</p>
-            
-            <div class="recipe-meta">
-                <span class="recipe-time">⏱️ ${recipe.time}</span>
-                <span class="recipe-difficulty">📊 ${recipe.difficulty}</span>
-            </div>
-            
-            <h3>Ingrédients nécessaires :</h3>
-            <ul class="ingredients-list">
-                ${recipe.ingredients.map(ing => {
-                    const hasIngredient = this.ingredients.some(userIng => 
-                        userIng.includes(ing) || ing.includes(userIng)
-                    );
-                    return `<li class="${hasIngredient ? 'has-ingredient' : 'missing-ingredient'}">${ing} ${hasIngredient ? '✅' : '❌'}</li>`;
-                }).join('')}
-            </ul>
-            
-            ${missingIngredients.length > 0 ? `
-                <div class="missing-warning">
-                    <h4>⚠️ Ingrédients manquants :</h4>
-                    <p>${missingIngredients.join(', ')}</p>
-                </div>
-            ` : ''}
-            
-            <h3>Instructions :</h3>
-            <ol class="instructions-list">
-                ${recipe.instructions.map(instruction => 
-                    `<li>${instruction}</li>`
-                ).join('')}
-            </ol>
-        `;
-        
-        modal.style.display = 'block';
-    }
 
     async generateAIRecipe() {
         if (this.ingredients.length === 0) {
