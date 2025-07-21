@@ -1,6 +1,6 @@
 # Scripts de Déploiement
 
-Ce dossier contient tous les scripts et configurations nécessaires pour déployer le site Fun Lean IT Performance.
+Ce dossier contient tous les scripts et configurations nécessaires pour déployer le site Fun Lean IT Performance. Tous les outils sont conçus pour fonctionner indifféremment sous **macOS**, **Linux** ou **Windows**.
 
 ## 📁 Structure
 
@@ -9,7 +9,8 @@ scripts/
 ├── deploy-simple.js          # Script de déploiement principal (recommandé)
 ├── deploy-multi.js           # Script de déploiement interactif (avancé)
 ├── deploy.js                 # Script de déploiement original (legacy)
-├── deploy.sh                 # Script bash (legacy)
+├── deploy.sh                 # Wrapper bash pour deploy-simple.js
+├── deploy.ps1                # Wrapper PowerShell pour Windows
 ├── deploy-env.js             # Configuration FTP personnalisée
 ├── deploy-env.example.js     # Exemple de configuration FTP
 ├── README-deploy.md          # Documentation deploy.js

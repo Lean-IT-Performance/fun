@@ -1,5 +1,7 @@
 # 🎛️ Script de Déploiement Console Admin
 
+> Compatible macOS, Linux et Windows
+
 ## 🚀 Usage Simple
 
 ```bash
