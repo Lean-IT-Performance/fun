@@ -244,7 +244,7 @@ Les contributions sont les bienvenues ! Pour contribuer :
 
 ## 📄 License
 
-Ce projet est sous license propriétaire. Tous droits réservés © 2025 Fun Lean IT Performance.
+Ce projet est licencié sous la [licence MIT](./LICENSE).
 
 ## 📞 Support
 
