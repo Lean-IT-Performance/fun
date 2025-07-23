@@ -82,26 +82,20 @@ FTP_PASS=votre_mot_de_passe_ftp
 
 ## 📊 API OpenAI Integration
 
-### Endpoints Utilisés
-- `GET /v1/usage` : Statistiques d'usage détaillées
-- `GET /v1/models` : Liste des modèles disponibles (test connexion)
+### Intégration OpenAI Usage API
 
-### Données Récupérées
-- **Requêtes par jour** : Nombre total de calls API
-- **Tokens par jour** : Input/output tokens utilisés
-- **Coûts calculés** : Basés sur les tarifs officiels OpenAI
-- **Usage par modèle** : Répartition fine-tuning
+La console utilise l'**API OpenAI Usage officielle** (`/v1/organization/costs`) pour obtenir les vraies données d'utilisation.
 
-### Calcul des Coûts
-```javascript
-// Tarifs GPT-4o-mini (exemples)
-Input tokens:  $0.15 / 1K tokens
-Output tokens: $0.60 / 1K tokens
+**Configuration requise :**
+- Compte organisation OpenAI (requis)
+- Variables `.env` : `OPENAI_API_KEY`, `OPENAI_ORG_ID`, `OPENAI_PROJECT_ID`
 
-// Tarifs GPT-4
-Input tokens:  $30.00 / 1K tokens  
-Output tokens: $60.00 / 1K tokens
-```
+**Fonctionnalités :**
+- Sélection de période personnalisée et périodes rapides
+- Sources multiples : API temps réel, cache local, simulation
+- Métriques : coût mensuel, requêtes quotidiennes, tokens, coût moyen par requête
+
+Pour la documentation technique complète, consultez `README-OPENAI-USAGE.md`.
 
 ## 🔒 Sécurité
 

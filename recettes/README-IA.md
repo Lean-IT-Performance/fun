@@ -7,13 +7,13 @@ Depuis la version 1.1, la recherche locale a ete retiree au profit d'une generat
 
 ## 🔐 Sécurité
 
-**IMPORTANT** : La clé API OpenAI est intégrée via un Service Worker pour offrir une sécurité relative. Pour une sécurité optimale en production, il est recommandé d'utiliser un backend dédié.
+**Architecture Sécurisée :** Le générateur utilise un backend PHP (`api/recipes-generator.php`) pour protéger la clé API.
 
-### Architecture de sécurité :
-- ✅ Service Worker comme proxy
-- ✅ Clé API non visible dans le code principal
-- ⚠️ Limitation : Accessible via les outils développeur
-- 🔒 Alternative recommandée : Backend Node.js/PHP
+### Migration de Sécurité Effectuée :
+- ✅ **Backend sécurisé** : Clé API protégée côté serveur
+- ✅ **Validation des données** : Contrôle strict des paramètres
+- ✅ **Logs d'usage** : Tracking des appels API dans `logs/openai_usage.log`
+- ✅ **Service Worker** : Redirection vers backend
 
 ## 🧠 Fonctionnalités IA
 
