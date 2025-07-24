@@ -45,7 +45,7 @@ class ConfigManager {
     async loadFromEndpoint() {
         // Chargement via endpoint sécurisé (côté client)
         try {
-            const response = await fetch('/api/config');
+            const response = await fetch('/api/config.php');
             if (response.ok) {
                 const config = await response.json();
                 this.config = config;

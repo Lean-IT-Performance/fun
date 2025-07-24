@@ -53,6 +53,12 @@ const sites = {
             'DIAGNOSTIC-TOOLS.md',
             'GUIDE-INSTALLATION.md'
         ]
+    },
+    api: {
+        name: "API Endpoints",
+        localPath: "./api",
+        remoteDir: "api",
+        files: ['config.php']
     }
 };
 
