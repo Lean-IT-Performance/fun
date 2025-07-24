@@ -10,7 +10,7 @@ const sites = {
     homepage: {
         name: "Page d'accueil",
         localPath: ".",
-        files: ['index.html', 'styles.css', 'script.js', '.htaccess']
+        files: ['index.html', 'styles.css', 'script.js', 'config.js', '.htaccess']
     },
     sobre: {
         name: "Sobre - Calculateur d'alcoolémie",

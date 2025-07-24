@@ -43,7 +43,7 @@ const sites = {
         name: "Page d'accueil",
         localPath: "..",
         remoteDir: ".", // Racine du serveur FTP
-        files: ['index.html', 'styles.css', 'script.js', '.htaccess']
+        files: ['index.html', 'styles.css', 'script.js', 'config.js', '.htaccess']
     },
     sobre: {
         name: "Sobre - Calculateur d'alcoolémie",
