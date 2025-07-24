@@ -43,7 +43,7 @@ const sites = {
         name: "Page d'accueil",
         localPath: "..",
         remoteDir: ".", // Racine du serveur FTP
-        files: ['index.html', 'styles.css', 'script.js', 'config.js', '.htaccess']
+        files: ['index.html', 'styles.css', 'script.js', 'config.js', 'shared-styles.css', 'theme-manager.js', 'animation-manager.js', '.htaccess']
     },
     sobre: {
         name: "Sobre - Calculateur d'alcoolémie",
@@ -55,7 +55,7 @@ const sites = {
         name: "Mes Recettes - Générateur de recettes",
         localPath: "../recettes",
         remoteDir: "recettes", // Sous-répertoire recettes
-        files: ['index.html', 'styles.css', 'script.js', 'sw.js', 'SECURITY-MIGRATION.md']
+        files: ['index.html', 'styles.css', 'script.js', 'sw.js']
     },
     admin: {
         name: "Console Admin - Monitoring API",
@@ -79,7 +79,7 @@ const sites = {
         name: "API Admin - Endpoints Backend",
         localPath: "../api",
         remoteDir: "api", // Sous-répertoire api
-        files: ['admin/auth.php', 'admin/openai-usage.php', 'admin/config-test.php', 'recipes-generator.php']
+        files: ['admin/auth.php', 'admin/openai-usage.php', 'admin/config-test.php', 'recipes-generator.php', 'config.php']
     }
 };
 

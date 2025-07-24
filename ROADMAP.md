@@ -71,11 +71,10 @@ Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT P
 - [ ] **Devises** - Conversion en temps réel (API taux de change)
 - [ ] **Mesures diverses** - Longueur, surface, volume, vitesse
 - [ ] **Conversions contextuelles** - Suggestions intelligentes selon l'usage
-- [ ] **Historique conversions** - Sauvegarde des conversions fréquentes
 
 #### Calculateur de temps de cuisson
 - [ ] **Ajustement portions** - Recalcul automatique selon le nombre de convives
-- [ ] **Types de cuisson** - Four, casserole, micro-ondes, barbecue
+- [ ] **Types de cuisson** - Four, casserole, air-fryer, autocuiseur, micro-ondes, barbecue, plancha
 - [ ] **Facteurs correctifs** - Altitude, type d'appareil, préférences de cuisson
 - [ ] **Timer intégré** - Alertes et notifications de cuisson
 - [ ] **Base de données aliments** - Temps standards pour 200+ ingrédients

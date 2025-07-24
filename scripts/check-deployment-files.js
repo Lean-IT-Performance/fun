@@ -10,7 +10,7 @@ const sites = {
     homepage: {
         name: "Page d'accueil",
         localPath: ".",
-        files: ['index.html', 'styles.css', 'script.js', 'config.js', '.htaccess']
+        files: ['index.html', 'styles.css', 'script.js', 'config.js', 'shared-styles.css', 'theme-manager.js', 'animation-manager.js', '.htaccess']
     },
     sobre: {
         name: "Sobre - Calculateur d'alcoolémie",
@@ -20,7 +20,7 @@ const sites = {
     recettes: {
         name: "Mes Recettes - Générateur de recettes",
         localPath: "./recettes",
-        files: ['index.html', 'styles.css', 'script.js', 'sw.js', 'SECURITY-MIGRATION.md']
+        files: ['index.html', 'styles.css', 'script.js', 'sw.js']
     },
     admin: {
         name: "Console Admin - Monitoring API",
@@ -30,13 +30,8 @@ const sites = {
             'styles.css', 
             'script.js', 
             'api.js', 
-            'test-auth.html', 
-            'test-backend.html',
-            'test-openai-usage.js',
             'README.md', 
-            'README-OPENAI-USAGE.md',
-            'DIAGNOSTIC-TOOLS.md',
-            'GUIDE-INSTALLATION.md'
+            'README-OPENAI-USAGE.md'
         ]
     },
     api: {
@@ -46,7 +41,8 @@ const sites = {
             'admin/auth.php', 
             'admin/openai-usage.php', 
             'admin/config-test.php',
-            'recipes-generator.php'
+            'recipes-generator.php',
+            'config.php'
         ]
     }
 };

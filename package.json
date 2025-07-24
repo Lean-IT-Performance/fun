@@ -8,6 +8,7 @@
     "deploy:sobre": "node scripts/deploy-simple.js sobre",
     "deploy:recettes": "node scripts/deploy-simple.js recettes",
     "deploy:admin": "node scripts/deploy-admin.js",
+    "deploy:api": "node scripts/deploy-simple.js api",
     "deploy:all": "node scripts/deploy-simple.js all",
     "deploy:old": "node scripts/deploy.js",
     "deploy:multi": "node scripts/deploy-multi.js",
