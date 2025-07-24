@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes Recettes - Générateur de recettes intelligentes</title>
     <meta name="description" content="Découvrez des recettes délicieuses basées sur les ingrédients de votre frigo - Anti-gaspillage et économique">
+    <link rel="stylesheet" href="../shared-styles.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+    <header class="header">
         <div class="container">
             <nav class="breadcrumb">
                 <a href="../">🏠 Accueil</a>
@@ -16,20 +17,20 @@
                 <span>Mes Recettes</span>
             </nav>
             <h1>🍳 Mes Recettes</h1>
-            <p>Transformez vos ingrédients en délicieux repas</p>
+            <p class="tagline">Transformez vos ingrédients en délicieux repas</p>
         </div>
     </header>
 
     <main class="container">
         <section class="ingredients-input">
             <div class="card">
-                <h2>Que trouvez-vous dans votre frigo ?</h2>
-                <p>Ajoutez les ingrédients disponibles et découvrez les recettes possibles</p>
+                <h2 class="card-title">Que trouvez-vous dans votre frigo ?</h2>
+                <p class="card-description">Ajoutez les ingrédients disponibles et découvrez les recettes possibles</p>
                 
                 <div class="input-section">
                     <div class="ingredient-input">
                         <input type="text" id="ingredient-input" placeholder="Ex: tomates, fromage, pâtes..." autocomplete="off">
-                        <button id="add-ingredient" class="btn-primary">Ajouter</button>
+                        <button id="add-ingredient" class="btn btn-primary">Ajouter</button>
                     </div>
                     
                     <div class="quick-ingredients">
