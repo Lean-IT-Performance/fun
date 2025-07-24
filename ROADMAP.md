@@ -29,6 +29,7 @@ Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT P
 - [x] **Mode sombre** - Thème sombre pour toutes les applications
 - [ ] **Accessibilité** - Conformité WCAG 2.1 AA (navigation clavier, lecteurs d'écran)
 - [ ] **Mode sombre** - Revoir les couleurs du mode sombre car c'est trop moche. Voir ce que fait le site https://www.darkmode.app/ pour les couleurs.
+- [ ] **Mode sombre** - Il y a plein de boutons qui sont des boutons standards (Ajouter la boisson, modifier le profil, Nouvelle session, Tout effacer). Il faut les remplacer par des boutons custom qui ont un design plus moderne. Comme les boutons Une autres ! modifier ou Supprimer.
 - [x] **Animations fluides** - Micro-interactions pour améliorer l'engagement
 
 #### Applications existantes
