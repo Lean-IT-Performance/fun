@@ -17,15 +17,15 @@
     </header>
 
     <main class="container">
-        <section class="hero">
-            <h2>Bienvenue sur notre plateforme d'outils</h2>
-            <p>Découvrez notre collection d'applications web conçues pour vous faciliter la vie quotidienne</p>
+        <section class="hero" data-animate="fade-in">
+            <h2 class="typing-effect">Bienvenue sur notre plateforme d'outils</h2>
+            <p data-animate="fade-in" data-delay="500">Découvrez notre collection d'applications web conçues pour vous faciliter la vie quotidienne</p>
         </section>
 
-        <section class="grid grid-cols-2 mt-8">
-            <div class="card">
+        <section class="grid grid-cols-2 mt-8" data-stagger="200">
+            <div class="card" data-animate="slide-in-left">
                 <div class="card-header">
-                    <div class="text-4xl mb-4">🍷</div>
+                    <div class="text-4xl mb-4 icon-rotate">🍷</div>
                     <h3 class="card-title">Sobre</h3>
                     <p class="card-description">Calculateur scientifique de taux d'alcoolémie basé sur la formule de Widmark pour une consommation responsable</p>
                 </div>
@@ -37,9 +37,9 @@
                 <a href="sobre/index.html" class="btn btn-primary">Utiliser Sobre</a>
             </div>
 
-            <div class="card">
+            <div class="card" data-animate="slide-in-right">
                 <div class="card-header">
-                    <div class="text-4xl mb-4">🍳</div>
+                    <div class="text-4xl mb-4 icon-rotate">🍳</div>
                     <h3 class="card-title">Mes Recettes</h3>
                     <p class="card-description">Générateur de recettes intelligent basé sur les ingrédients disponibles dans votre frigo</p>
                 </div>
@@ -52,7 +52,7 @@
             </div>
         </section>
 
-        <section class="about">
+        <section class="about" data-animate="fade-in-up">
             <h2>À propos</h2>
             <p>Notre mission est de créer des outils web simples, efficaces et respectueux de votre vie privée. Toutes nos applications fonctionnent entièrement côté client, garantissant que vos données restent sur votre appareil.</p>
             
@@ -90,6 +90,7 @@
     </footer>
 
     <script src="theme-manager.js"></script>
+    <script src="animation-manager.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

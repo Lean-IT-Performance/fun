@@ -23,11 +23,11 @@
     </header>
 
     <main>
-        <div class="alert alert-warning">
+        <div class="alert alert-warning" data-animate="slide-in-down">
             <p><strong>⚠️ Avertissement :</strong> Cette application fournit des estimations uniquement. Ne vous fiez jamais à ces calculs pour prendre le volant. Consultez toujours un professionnel de santé.</p>
         </div>
 
-        <section id="profile-section" class="card">
+        <section id="profile-section" class="card" data-animate="fade-in-up">
             <h2 class="card-title">Votre Profil</h2>
             <form id="profile-form">
                 <div class="form-group">
@@ -59,7 +59,7 @@
             </form>
         </section>
 
-        <section id="session-section" class="card" style="display: none;">
+        <section id="session-section" class="card" data-animate="scale-in" style="display: none;">
             <h2>Session de Consommation</h2>
 
             <div class="bac-display">
@@ -343,6 +343,7 @@
     </footer>
 
     <script src="../theme-manager.js"></script>
+    <script src="../animation-manager.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

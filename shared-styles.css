@@ -119,11 +119,23 @@
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
   
-  /* ===== TRANSITIONS ===== */
+  /* ===== TRANSITIONS & ANIMATIONS ===== */
   
   --transition-fast: 150ms ease-in-out;
   --transition-normal: 300ms ease-in-out;
   --transition-slow: 500ms ease-in-out;
+  
+  /* Courbes d'animation avancées */
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Durées d'animation */
+  --duration-instant: 100ms;
+  --duration-quick: 200ms;
+  --duration-smooth: 400ms;
+  --duration-slow: 600ms;
   
   /* ===== CONTENEURS ===== */
   
@@ -1009,6 +1021,520 @@ body {
     font-size: var(--text-lg);
     top: var(--space-3);
     right: var(--space-3);
+  }
+}
+
+/* =================================================================
+   ✨ ANIMATIONS & MICRO-INTERACTIONS
+   ================================================================= */
+
+/* ===== KEYFRAMES ANIMATIONS ===== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -20px, 0);
+  }
+  70% {
+    transform: translate3d(0, -10px, 0);
+  }
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes wiggle {
+  0%, 7% {
+    transform: rotateZ(0);
+  }
+  15% {
+    transform: rotateZ(-15deg);
+  }
+  20% {
+    transform: rotateZ(10deg);
+  }
+  25% {
+    transform: rotateZ(-10deg);
+  }
+  30% {
+    transform: rotateZ(6deg);
+  }
+  35% {
+    transform: rotateZ(-4deg);
+  }
+  40%, 100% {
+    transform: rotateZ(0);
+  }
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--color-primary-alpha);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--color-primary), 0 0 30px var(--color-primary-alpha);
+  }
+}
+
+/* ===== CLASSES D'ANIMATION ===== */
+
+.animate-fade-in {
+  animation: fadeIn var(--duration-smooth) var(--ease-out-expo) forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp var(--duration-smooth) var(--ease-out-expo) forwards;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown var(--duration-smooth) var(--ease-out-expo) forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft var(--duration-smooth) var(--ease-out-expo) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight var(--duration-smooth) var(--ease-out-expo) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--duration-quick) var(--ease-out-back) forwards;
+}
+
+.animate-bounce {
+  animation: bounce 1s var(--ease-bounce);
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-wiggle {
+  animation: wiggle 0.8s ease-in-out;
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* Animation avec délais pour effets en cascade */
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-500 { animation-delay: 500ms; }
+
+/* ===== MICRO-INTERACTIONS AMÉLIORÉES ===== */
+
+/* Cartes avec animations améliorées */
+.card {
+  transform: translateY(0);
+  transition: all var(--duration-quick) var(--ease-out-circ);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.card.interactive:active {
+  transform: translateY(-4px) scale(0.98);
+  transition-duration: var(--duration-instant);
+}
+
+/* Boutons avec animations avancées */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transform: translateY(0);
+  transition: all var(--duration-quick) var(--ease-out-circ);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn:active {
+  transform: translateY(-1px) scale(0.95);
+  transition-duration: var(--duration-instant);
+}
+
+/* Effet de focus amélioré */
+.btn:focus,
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  transform: scale(1.02);
+  transition: all var(--duration-quick) var(--ease-out-circ);
+}
+
+/* Formulaires avec animations */
+.form-input,
+.form-select,
+.form-textarea {
+  transition: all var(--duration-quick) var(--ease-out-circ);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  transform: translateY(-2px);
+}
+
+/* Labels animés */
+.form-label {
+  transition: all var(--duration-quick) var(--ease-out-circ);
+}
+
+.form-group.focused .form-label {
+  transform: translateY(-2px);
+  color: var(--color-primary);
+}
+
+/* Badges avec effet hover */
+.badge {
+  transition: all var(--duration-quick) var(--ease-out-circ);
+  cursor: default;
+}
+
+.badge:hover {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Alertes avec animation d'entrée */
+.alert {
+  animation: slideInDown var(--duration-smooth) var(--ease-out-expo);
+}
+
+/* Loading avec animation améliorée */
+.loading {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Skeleton avec animation wave */
+.skeleton {
+  animation: shimmer 2s infinite, pulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ===== INTERACTIONS SPÉCIFIQUES ===== */
+
+/* Hover effects pour liens */
+a {
+  transition: all var(--duration-quick) var(--ease-out-circ);
+}
+
+a:hover {
+  transform: translateY(-1px);
+}
+
+/* Images avec effet zoom */
+img {
+  transition: transform var(--duration-smooth) var(--ease-out-circ);
+}
+
+img:hover {
+  transform: scale(1.05);
+}
+
+/* Icônes avec rotation */
+.icon-rotate {
+  transition: transform var(--duration-quick) var(--ease-out-circ);
+}
+
+.icon-rotate:hover {
+  transform: rotate(15deg);
+}
+
+/* Effet de typing pour le texte */
+.typing-effect {
+  overflow: hidden;
+  border-right: 2px solid var(--color-primary);
+  white-space: nowrap;
+  animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--color-primary);
+  }
+}
+
+/* Particles effect pour célébrations */
+.celebrate {
+  position: relative;
+  overflow: hidden;
+}
+
+.celebrate::after {
+  content: '🎉';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  opacity: 0;
+  animation: celebrate 2s var(--ease-out-expo);
+}
+
+@keyframes celebrate {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0) scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-30px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-60px) scale(1);
+  }
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+
+/* Éléments qui apparaissent au scroll */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all var(--duration-smooth) var(--ease-out-expo);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Parallax léger */
+.parallax {
+  transition: transform 0.1s ease-out;
+}
+
+/* ===== THÈME TOGGLE AMÉLIORÉ ===== */
+
+.theme-toggle {
+  transition: all var(--duration-quick) var(--ease-out-back);
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px) scale(1.1);
+  animation: pulse var(--duration-smooth) ease-in-out;
+}
+
+.theme-toggle:active {
+  transform: translateY(0) scale(0.95);
+}
+
+/* Animation de changement de thème */
+.theme-transition {
+  transition: all var(--duration-smooth) var(--ease-out-expo);
+}
+
+/* ===== ÉTAT DE CHARGEMENT AMÉLIORÉ ===== */
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.loading-dots {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.loading-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  animation: loadingDots 1.4s ease-in-out infinite both;
+}
+
+.loading-dot:nth-child(1) { animation-delay: -0.32s; }
+.loading-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes loadingDots {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ===== INTERACTIONS TOUCH AMÉLIORÉES ===== */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Adaptations pour appareils tactiles */
+  .btn:hover {
+    transform: none;
+  }
+  
+  .card:hover {
+    transform: none;
+  }
+  
+  /* Feedback tactile avec active states */
+  .btn:active {
+    transform: scale(0.95);
+    background: var(--color-primary-dark);
+  }
+  
+  .card:active {
+    transform: scale(0.98);
   }
 }
 
