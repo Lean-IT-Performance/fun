@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre - Calculateur de Taux d'Alcoolémie</title>
     <meta name="description" content="Application web pour la consommation responsable d'alcool avec calcul scientifique du taux d'alcoolémie">
+    <link rel="stylesheet" href="../shared-styles.css">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <header>
+    <header class="header">
         <div class="container">
             <nav class="breadcrumb">
                 <a href="../">🏠 Accueil</a>
@@ -17,26 +18,26 @@
                 <span>Sobre</span>
             </nav>
             <h1>🍺 Sobre</h1>
-            <p>Calculateur de Taux d'Alcoolémie</p>
+            <p class="tagline">Calculateur de Taux d'Alcoolémie</p>
         </div>
     </header>
 
     <main>
-        <div class="disclaimer">
+        <div class="alert alert-warning">
             <p><strong>⚠️ Avertissement :</strong> Cette application fournit des estimations uniquement. Ne vous fiez jamais à ces calculs pour prendre le volant. Consultez toujours un professionnel de santé.</p>
         </div>
 
         <section id="profile-section" class="card">
-            <h2>Votre Profil</h2>
+            <h2 class="card-title">Votre Profil</h2>
             <form id="profile-form">
                 <div class="form-group">
-                    <label for="weight">Poids (kg):</label>
-                    <input type="number" id="weight" min="30" max="200" step="1" required>
+                    <label for="weight" class="form-label">Poids (kg):</label>
+                    <input type="number" id="weight" class="form-input" min="30" max="200" step="1" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="gender">Sexe:</label>
-                    <select id="gender" required>
+                    <label for="gender" class="form-label">Sexe:</label>
+                    <select id="gender" class="form-select" required>
                         <option value="">Sélectionner</option>
                         <option value="male">Homme</option>
                         <option value="female">Femme</option>
@@ -44,8 +45,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="driver-type">Type de conducteur:</label>
-                    <select id="driver-type" required>
+                    <label for="driver-type" class="form-label">Type de conducteur:</label>
+                    <select id="driver-type" class="form-select" required>
                         <option value="">Sélectionner</option>
                         <option value="experienced">Conducteur expérimenté (limite 0,5g/L)</option>
                         <option value="apprentice">Conducteur apprenti (limite 0,2g/L)</option>
@@ -54,7 +55,7 @@
                     </select>
                 </div>
                 
-                <button type="submit">Enregistrer le profil</button>
+                <button type="submit" class="btn btn-primary">Enregistrer le profil</button>
             </form>
         </section>
 
