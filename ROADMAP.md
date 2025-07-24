@@ -32,14 +32,60 @@ Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT P
 
 #### Applications existantes
 - [ ] **Sobre** - Export PDF des graphiques BAC, sauvegarde historique en galerie mobile
-- [ ] **Mes Recettes** - Export PDF des recettes, images recettes sauvegardables, partage visuel
+- [ ] **Mes Recettes** - Fonctionnalités avancées (voir section dédiée)
 - [ ] **Admin** - Export PDF des rapports de coûts, graphiques sauvegardables
 
----
+#### Extensions Mes Recettes
+- [ ] **Planificateur de repas** - Sélection de recettes pour planifier la semaine
+- [ ] **Génération liste de courses** - Liste automatique basée sur les recettes sélectionnées
+- [ ] **Calculateur nutritionnel** - Équilibrage des repas selon l'âge et besoins nutritionnels
+- [ ] **Groupage d'ingrédients** - Optimisation des achats et réduction du gaspillage
+- [ ] **Export planning PDF** - Planning des repas et liste de courses imprimable
 
 ---
 
-## 🌐 Phase 2 - Expansion & Optimisation
+---
+
+## 🌐 Phase 2 - Expansion & Nouvelles Applications
+
+### 👶 Enfants et Éducation
+
+#### Générateur d'activités
+- [ ] **Activités selon l'âge** - Suggestions d'activités adaptées par tranche d'âge (3-5, 6-10, 11-15 ans)
+- [ ] **Adaptation météo** - Activités intérieures/extérieures selon les conditions
+- [ ] **Durée modulable** - Activités courtes (15min) ou longues (2h+)
+- [ ] **Matériel disponible** - Filtrage selon les ressources à disposition
+- [ ] **Export planning** - Programme d'activités PDF pour la journée/semaine
+
+#### Aide aux devoirs
+- [ ] **Calculatrices spécialisées** - Mathématiques par niveau scolaire
+- [ ] **Convertisseurs éducatifs** - Unités, monnaies, temps (avec explications)
+- [ ] **Générateur d'exercices** - Mathématiques, français, sciences selon le niveau
+- [ ] **Corrections automatiques** - Vérification et explications des réponses
+- [ ] **Suivi des progrès** - Historique des exercices et statistiques (local)
+
+### 🔧 Outils Pratiques
+
+#### Convertisseur universel
+- [ ] **Unités de cuisine** - Volume, poids, température avec équivalences
+- [ ] **Devises** - Conversion en temps réel (API taux de change)
+- [ ] **Mesures diverses** - Longueur, surface, volume, vitesse
+- [ ] **Conversions contextuelles** - Suggestions intelligentes selon l'usage
+- [ ] **Historique conversions** - Sauvegarde des conversions fréquentes
+
+#### Calculateur de temps de cuisson
+- [ ] **Ajustement portions** - Recalcul automatique selon le nombre de convives
+- [ ] **Types de cuisson** - Four, casserole, micro-ondes, barbecue
+- [ ] **Facteurs correctifs** - Altitude, type d'appareil, préférences de cuisson
+- [ ] **Timer intégré** - Alertes et notifications de cuisson
+- [ ] **Base de données aliments** - Temps standards pour 200+ ingrédients
+
+#### Générateur de listes rapides
+- [ ] **Listes anniversaires** - Checklist organisation par type de fête
+- [ ] **Rentrée scolaire** - Fournitures par niveau et établissement
+- [ ] **Déménagement** - Étapes et documents par timeline
+- [ ] **Templates personnalisables** - Création de listes sur mesure
+- [ ] **Partage familial** - Export et partage des listes sans compte
 
 ### 🔗 Intégrations & APIs
 
@@ -142,6 +188,8 @@ Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT P
 - **IA** : TensorFlow.js, WebAssembly pour modèles locaux, OpenAI via proxy sécurisé
 - **Export** : jsPDF pour génération PDF, html2canvas pour captures d'écran
 - **Mobile** : Web Share API, File System Access API pour sauvegardes
+- **APIs externes** : Taux de change, météo, bases nutritionnelles (avec cache local)
+- **Calculs avancés** : Bibliothèques mathématiques pour exercices et conversions
 
 ### Infrastructure cible (sans tracking utilisateur)
 - **CDN** : Cloudflare pour performances globales et cache statique
@@ -159,9 +207,10 @@ Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT P
 - Sécurité renforcée
 
 ### Phase 2 (Important) 🟡
-- Intégrations externes
+- Extensions Mes Recettes (planification, nutrition)
+- Applications Enfants & Éducation
+- Outils Pratiques (convertisseurs, listes)
 - Export/Import de données
-- Analytics personnelles locales
 
 ### Phase 3 (Innovation) 🔵
 - Partage sans compte
