@@ -1,12 +1,12 @@
-# 🗺️ Fun Lean IT Performance - Roadmap 2025-2026
+# 🗺️ Fun Lean IT Performance - Roadmap
 
 ## 📋 Vue d'ensemble
 
-Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT Performance sur 18 mois, en se concentrant sur l'amélioration de l'expérience utilisateur, l'extension des fonctionnalités et l'optimisation technique.
+Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT Performance, en se concentrant sur l'amélioration de l'expérience utilisateur, les fonctionnalités client-side avancées et l'innovation technique sans compromis sur la confidentialité.
 
 ---
 
-## 🎯 Phase 1 - Consolidation & Amélioration (Q1 2025)
+## 🎯 Phase 1 - Consolidation & Amélioration
 
 ### 🔧 Améliorations techniques
 
@@ -31,66 +31,15 @@ Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT P
 - [ ] **Animations fluides** - Micro-interactions pour améliorer l'engagement
 
 #### Applications existantes
-- [ ] **Sobre** - Ajout de profils multiples, export des données, historique étendu
-- [ ] **Mes Recettes** - Sauvegarde de recettes favorites, notes personnelles, partage
-- [ ] **Admin** - Dashboard temps réel, alertes configurables, rapports automatiques
+- [ ] **Sobre** - Export PDF des graphiques BAC, sauvegarde historique en galerie mobile
+- [ ] **Mes Recettes** - Export PDF des recettes, images recettes sauvegardables, partage visuel
+- [ ] **Admin** - Export PDF des rapports de coûts, graphiques sauvegardables
 
 ---
 
-## 🚀 Phase 2 - Nouvelles fonctionnalités (Q2-Q3 2025)
-
-### 📱 Applications nouvelles
-
-#### Time Tracker (⏱️)
-**Objectif :** Outil de productivité et gestion du temps
-- [ ] **Core features**
-  - Suivi de tâches avec timer Pomodoro
-  - Catégorisation automatique des activités
-  - Statistiques et rapports de productivité
-  - Objectifs quotidiens/hebdomadaires
-- [ ] **Advanced features**
-  - Intégration calendrier (import/export ICS)
-  - Détection automatique d'inactivité
-  - Analyse de patterns de productivité
-  - Export vers des outils externes (Toggl, RescueTime)
-
-#### Budget Manager (💰)
-**Objectif :** Gestionnaire de finances personnelles
-- [ ] **Core features**
-  - Suivi des revenus et dépenses
-  - Catégorisation automatique par IA
-  - Budgets mensuels avec alertes
-  - Visualisation graphique des flux financiers
-- [ ] **Advanced features**
-  - Import automatique depuis les banques (via APIs)
-  - Prédictions budgétaires basées sur l'historique
-  - Objectifs d'épargne avec progression
-  - Rapports fiscaux et export comptable
-
-#### Health Tracker (🏃‍♂️)
-**Objectif :** Suivi santé et bien-être
-- [ ] **Core features**
-  - Suivi du poids, tension, activité physique
-  - Journal alimentaire avec base nutritionnelle
-  - Hydratation et sommeil
-  - Graphiques d'évolution long terme
-- [ ] **Advanced features**
-  - Intégration wearables (Fitbit, Apple Health)
-  - Analyse de corrélations (poids/activité/sommeil)
-  - Recommandations personnalisées par IA
-  - Export pour professionnels de santé
-
-### 🤖 Intelligence Artificielle
-
-#### Assistant IA Intégré
-- [ ] **Chatbot contextuel** - Assistant pour navigation et aide
-- [ ] **Recommandations cross-app** - Suggestions basées sur l'usage multi-applications
-- [ ] **Analyse prédictive** - Tendances et prédictions personnalisées
-- [ ] **Automatisation intelligente** - Workflows automatiques basés sur les habitudes
-
 ---
 
-## 🌐 Phase 3 - Expansion & Optimisation (Q4 2025 - Q1 2026)
+## 🌐 Phase 2 - Expansion & Optimisation
 
 ### 🔗 Intégrations & APIs
 
@@ -102,18 +51,20 @@ Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT P
   - Slack, Discord pour notifications
   - Zapier pour automatisations
 
-#### Synchronisation multi-appareils
-- [ ] **Cloud sync optionnel** - Synchronisation chiffrée end-to-end
-- [ ] **Backup/restore** - Sauvegarde automatique des données
-- [ ] **Multi-sessions** - Accès simultané depuis plusieurs appareils
+#### Données locales avancées
+- [ ] **Export/Import local** - Sauvegarde et restauration via fichiers JSON
+- [ ] **Export PDF** - Génération de rapports PDF côté client (jsPDF)
+- [ ] **Export vers galerie mobile** - Sauvegarde d'images dans la galerie de l'appareil
+- [ ] **Compression des données** - Optimisation du stockage localStorage
+- [ ] **Données temporaires** - Nettoyage automatique des sessions expirées
 
-### 📊 Analytics & Business Intelligence
+### 📊 Analytics Personnelles
 
-#### Analytics avancées
-- [ ] **Métriques d'usage** - Comprendre l'utilisation des fonctionnalités
-- [ ] **A/B Testing** - Tests de nouvelles fonctionnalités
-- [ ] **Feedback utilisateur** - Système de retours intégré
-- [ ] **Tableau de bord global** - Vue d'ensemble de l'écosystème utilisateur
+#### Analytics locales
+- [ ] **Métriques personnelles** - Statistiques d'usage pour l'utilisateur uniquement
+- [ ] **Comparaisons de fonctionnalités** - Tests A/B côté client avec choix utilisateur
+- [ ] **Feedback anonyme** - Système de retours sans identification
+- [ ] **Dashboard personnel** - Vue d'ensemble des données utilisateur (stockage local)
 
 ### 🏗️ Architecture & Scalabilité
 
@@ -125,31 +76,33 @@ Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT P
 
 ---
 
-## 🎨 Phase 4 - Innovation & Communauté (Q2-Q3 2026)
+## 🎨 Phase 3 - Innovation & Communauté
 
 ### 👥 Fonctionnalités sociales
 
-#### Communauté
-- [ ] **Profils utilisateur** - Système de comptes optionnels
-- [ ] **Partage sécurisé** - Partage de recettes, statistiques anonymisées
-- [ ] **Challenges communautaires** - Défis productivité, santé, etc.
-- [ ] **Leaderboards** - Classements anonymes et motivants
+#### Partage sans compte
+- [ ] **Partage via URL** - Génération de liens temporaires pour partager des données
+- [ ] **Export pour réseaux sociaux** - Images optimisées et résumés partageables
+- [ ] **Screenshots automatiques** - Capture d'écran des résultats sauvegardable en galerie
+- [ ] **PDF partageables** - Documents formatés pour impression ou envoi
+- [ ] **QR codes** - Partage rapide de configurations ou résultats
+- [ ] **Templates publics** - Modèles de recettes ou configurations prédéfinies
 
 ### 🔬 Fonctionnalités avancées
 
-#### Innovation technique
-- [ ] **IA locale** - Modèles IA tournant entièrement côté client
-- [ ] **Reconnaissance vocale** - Interface vocale pour saisie rapide
-- [ ] **Computer Vision** - Reconnaissance d'aliments, codes-barres
-- [ ] **Réalité Augmentée** - Visualisation de données en AR (mobile)
+#### Innovation technique locale
+- [ ] **IA locale** - Modèles IA légers tournant entièrement côté client (via WebAssembly)
+- [ ] **Reconnaissance vocale** - Web Speech API pour saisie rapide sans serveur
+- [ ] **Computer Vision locale** - Reconnaissance d'images via TensorFlow.js
+- [ ] **API natives** - Utilisation des APIs navigateur (Camera, Geolocation, Sensors)
 
 ### 🌍 Internationalisation
 
-#### Expansion globale
-- [ ] **Multi-langues** - Support anglais, espagnol, allemand
-- [ ] **Localisation** - Adaptation culturelle des fonctionnalités
-- [ ] **Conformité RGPD** - Respect complet des réglementations
-- [ ] **Accessibilité globale** - Support des standards internationaux
+#### Expansion globale sans serveur
+- [ ] **Multi-langues client-side** - Fichiers de traduction chargés dynamiquement
+- [ ] **Localisation des données** - Formats de date, devises, unités selon la région
+- [ ] **Privacy by design** - Conformité RGPD native (données 100% locales)
+- [ ] **Accessibilité universelle** - Support des standards internationaux WCAG
 
 ---
 
@@ -182,17 +135,19 @@ Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT P
 - **Déploiement** : FTP scripts (fiabilité)
 - **Tests** : Jest + Playwright (complétude)
 
-### Technologies à intégrer
-- **Build** : Vite ou esbuild pour l'optimisation
-- **CSS** : Variables CSS avancées, container queries
-- **PWA** : Workbox pour Service Worker avancé
-- **IA** : Ollama pour IA locale, OpenAI pour cloud
+### Technologies à intégrer (client-side uniquement)
+- **Build** : Vite ou esbuild pour l'optimisation et bundling
+- **CSS** : Variables CSS avancées, container queries, view transitions
+- **PWA** : Service Worker natif pour cache et fonctionnement offline
+- **IA** : TensorFlow.js, WebAssembly pour modèles locaux, OpenAI via proxy sécurisé
+- **Export** : jsPDF pour génération PDF, html2canvas pour captures d'écran
+- **Mobile** : Web Share API, File System Access API pour sauvegardes
 
-### Infrastructure cible
-- **CDN** : Cloudflare pour performances globales
-- **Monitoring** : Sentry pour error tracking
-- **Analytics** : Solution privacy-first (Plausible)
-- **CI/CD** : GitHub Actions complet
+### Infrastructure cible (sans tracking utilisateur)
+- **CDN** : Cloudflare pour performances globales et cache statique
+- **Monitoring** : Erreurs client-side anonymisées (sans données personnelles)
+- **Analytics** : Métriques techniques uniquement (temps de chargement, erreurs)
+- **CI/CD** : GitHub Actions pour tests et déploiement automatique
 
 ---
 
@@ -204,17 +159,12 @@ Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT P
 - Sécurité renforcée
 
 ### Phase 2 (Important) 🟡
-- Nouvelles applications
-- Intégration IA
-- Features avancées
-
-### Phase 3 (Souhaitable) 🟢
 - Intégrations externes
-- Synchronisation cloud
-- Analytics avancées
+- Export/Import de données
+- Analytics personnelles locales
 
-### Phase 4 (Innovation) 🔵
-- Fonctionnalités sociales
+### Phase 3 (Innovation) 🔵
+- Partage sans compte
 - IA locale
 - Expansion internationale
 
@@ -223,26 +173,18 @@ Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT P
 ## 🚦 Plan d'exécution
 
 ### Méthodologie
-1. **Développement itératif** - Cycles de 2 semaines
+1. **Développement itératif** - Implémentation progressive des fonctionnalités
 2. **User feedback continu** - Tests utilisateur réguliers
 3. **Déploiement progressif** - Feature flags et rollouts graduels
 4. **Monitoring constant** - Métriques temps réel et alertes
 
-### Ressources nécessaires
-- **Développement** : 2-3 développeurs full-stack
-- **Design** : 1 UI/UX designer
-- **IA/ML** : 1 spécialiste IA (à partir de Phase 2)
-- **DevOps** : Support externe pour infrastructure
-
-### Budget estimé
-- **Phase 1** : 15k€ (consolidation)
-- **Phase 2** : 25k€ (nouvelles apps)
-- **Phase 3** : 20k€ (intégrations)
-- **Phase 4** : 30k€ (innovation)
+### Approche de développement
+- **Développement solo** : Implémentation progressive par fonctionnalité
+- **Itérations courtes** : Focus sur les améliorations tangibles
+- **Priorité utilisateur** : Retours utilisateur pour guider les développements
 
 ---
 
-*Cette roadmap est un document vivant, mis à jour trimestriellement en fonction des retours utilisateurs et de l'évolution du marché.*
+*Cette roadmap est un document vivant, mis à jour régulièrement en fonction des retours utilisateurs et de l'évolution du marché.*
 
-**Dernière mise à jour** : Janvier 2025  
-**Prochaine révision** : Avril 2025
+**Dernière mise à jour** : Janvier 2025
