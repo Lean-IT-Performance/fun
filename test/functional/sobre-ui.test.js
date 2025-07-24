@@ -1,4 +1,6 @@
+/** @jest-environment node */
 // Tests fonctionnels pour l'interface Sobre
+const { setupBrowser, teardownBrowser } = require('../utils/playwright-setup.js');
 
 describe('Sobre UI Tests', () => {
     let helpers;
@@ -8,7 +10,8 @@ describe('Sobre UI Tests', () => {
         if (typeof require !== 'undefined') {
             helpers = require('../utils/test-helpers.js');
         }
-        
+
+        await setupBrowser();
         // Naviguer vers la page Sobre
         await page.goto(TEST_CONFIG.baseURL + TEST_CONFIG.pages.sobre);
     });
@@ -260,6 +263,10 @@ describe('Sobre UI Tests', () => {
             const drinksList = await page.textContent('#drinks-table-body');
             expect(drinksList).toContain('Vin rouge');
         });
+    });
+
+    afterAll(async () => {
+        await teardownBrowser();
     });
 });
 

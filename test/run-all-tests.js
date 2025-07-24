@@ -7,6 +7,20 @@
 
 const path = require('path');
 const { spawn } = require('child_process');
+const fs = require('fs');
+const { chromium } = require('playwright');
+const http = require('http');
+const https = require('https');
+const TEST_CONFIG = require('./config/test-config.js');
+
+function checkServer(url) {
+    return new Promise(resolve => {
+        const mod = url.startsWith('https') ? https : http;
+        const req = mod.request(url, { method: 'HEAD' }, () => resolve(true));
+        req.on('error', () => resolve(false));
+        req.end();
+    });
+}
 
 // Configuration des tests
 const TEST_SUITES = [
@@ -18,28 +32,6 @@ const TEST_SUITES = [
     }
 ];
 
-// Les suites lourdes (API, UI, E2E) ne sont lancées que si la variable
-// d'environnement FULL_TEST est positionnée à "true". Cela évite des erreurs
-// sur des environnements dépourvus de navigateur ou de serveur.
-if (process.env.FULL_TEST === 'true') {
-    TEST_SUITES.push(
-        {
-            name: 'Tests API',
-            tests: ['api/api-tests.js']
-        },
-        {
-            name: 'Tests Fonctionnels UI',
-            tests: [
-                'functional/sobre-ui.test.js',
-                'functional/recettes-ui.test.js'
-            ]
-        },
-        {
-            name: 'Tests E2E',
-            tests: ['integration/e2e-scenarios.test.js']
-        }
-    );
-}
 
 // Couleurs pour la console
 const colors = {
@@ -58,7 +50,7 @@ async function runTest(testFile, runner = 'jest') {
         console.log(`${colors.cyan}► Exécution de ${testFile}...${colors.reset}`);
         
         const testPath = path.join(__dirname, testFile);
-        const child = spawn(runner, [testPath], {
+    const child = spawn(runner, ['--runTestsByPath', testPath], {
             stdio: 'inherit',
             shell: true
         });
@@ -96,12 +88,45 @@ async function runTestSuite(suite) {
 // Fonction principale
 async function runAllTests() {
     console.log(`${colors.bright}${colors.yellow}🧪 Démarrage des tests pour Fun Lean IT Performance${colors.reset}\n`);
-    
+
     const startTime = Date.now();
     const allResults = [];
-    
+
+    const suites = [...TEST_SUITES];
+
+    if (process.env.FULL_TEST === 'true') {
+        const serverAvailable = await checkServer(TEST_CONFIG.baseURL);
+        if (serverAvailable) {
+            suites.push({ name: 'Tests API', tests: ['api/api-tests.js'] });
+        } else {
+            console.warn('Test server not reachable - skipping API tests');
+        }
+
+        let browserAvailable = true;
+        try {
+            const exe = chromium.executablePath();
+            if (!fs.existsSync(exe)) browserAvailable = false;
+        } catch (e) {
+            browserAvailable = false;
+        }
+
+        if (browserAvailable) {
+            suites.push({
+                name: 'Tests Fonctionnels UI',
+                tests: [
+                    'functional/homepage-ui.test.js',
+                    'functional/sobre-ui.test.js',
+                    'functional/recettes-ui.test.js'
+                ]
+            });
+            suites.push({ name: 'Tests E2E', tests: ['integration/e2e-scenarios.test.js'] });
+        } else {
+            console.warn('Playwright browsers not installed - skipping UI and E2E tests');
+        }
+    }
+
     // Exécuter chaque suite de tests
-    for (const suite of TEST_SUITES) {
+    for (const suite of suites) {
         const results = await runTestSuite(suite);
         allResults.push({ suite: suite.name, results });
     }
