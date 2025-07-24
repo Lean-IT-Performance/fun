@@ -1,4 +1,6 @@
+/** @jest-environment node */
 // Tests fonctionnels pour l'interface Recettes
+const { setupBrowser, teardownBrowser } = require('../utils/playwright-setup.js');
 
 describe('Recettes UI Tests', () => {
     let helpers;
@@ -8,7 +10,8 @@ describe('Recettes UI Tests', () => {
         if (typeof require !== 'undefined') {
             helpers = require('../utils/test-helpers.js');
         }
-        
+
+        await setupBrowser();
         // Naviguer vers la page Recettes
         await page.goto(TEST_CONFIG.baseURL + TEST_CONFIG.pages.recettes);
     });
@@ -335,6 +338,10 @@ describe('Recettes UI Tests', () => {
             const error = await page.textContent('.error-message');
             expect(error).toContain('erreur');
         });
+    });
+
+    afterAll(async () => {
+        await teardownBrowser();
     });
 });
 

@@ -37,7 +37,8 @@
   "jest": {
     "testEnvironment": "jsdom",
     "testMatch": [
-      "**/test/unit/**/*.test.js"
+      "**/test/**/*.test.js",
+      "**/test/**/*-tests.js"
     ],
     "collectCoverageFrom": [
       "sobre/script.js",

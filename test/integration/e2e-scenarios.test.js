@@ -1,7 +1,13 @@
+/** @jest-environment node */
 // Tests d'intégration End-to-End
+const { setupBrowser, teardownBrowser } = require('../utils/playwright-setup.js');
 
 describe('Scénarios E2E', () => {
     
+    beforeAll(async () => {
+        await setupBrowser();
+    });
+
     describe('Parcours utilisateur Sobre', () => {
         test('Parcours complet : configuration, ajout de boissons, calcul BAC', async () => {
             // 1. Aller sur la page d'accueil
@@ -289,6 +295,10 @@ describe('Scénarios E2E', () => {
             const drinkRows = await page.$$('#drinks-table-body tr');
             expect(drinkRows.length).toBeGreaterThan(0);
         });
+    });
+
+    afterAll(async () => {
+        await teardownBrowser();
     });
 });
 

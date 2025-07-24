@@ -1,3 +1,4 @@
+/** @jest-environment node */
 // Tests des endpoints API
 
 // Import des utilitaires si en Node.js
@@ -5,6 +6,7 @@ let apiRequest;
 if (typeof require !== 'undefined') {
     const helpers = require('../utils/test-helpers.js');
     apiRequest = helpers.apiRequest;
+    global.TEST_CONFIG = require('../config/test-config.js');
 }
 
 // Configuration
