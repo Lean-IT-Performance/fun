@@ -26,7 +26,7 @@ Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT P
 
 #### Design System
 - [x] **Système de design cohérent** - Variables CSS, composants réutilisables
-- [ ] **Mode sombre** - Thème sombre pour toutes les applications
+- [x] **Mode sombre** - Thème sombre pour toutes les applications
 - [ ] **Accessibilité** - Conformité WCAG 2.1 AA (navigation clavier, lecteurs d'écran)
 - [ ] **Animations fluides** - Micro-interactions pour améliorer l'engagement
 
