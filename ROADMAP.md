@@ -88,14 +88,6 @@ Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT P
 
 ### 🔗 Intégrations & APIs
 
-#### Écosystème externe
-- [ ] **API publique** - Ouverture d'APIs pour développeurs tiers
-- [ ] **Webhooks** - Notifications temps réel vers services externes
-- [ ] **Intégrations populaires**
-  - Google Calendar, Apple Health, Notion
-  - Slack, Discord pour notifications
-  - Zapier pour automatisations
-
 #### Données locales avancées
 - [ ] **Export/Import local** - Sauvegarde et restauration via fichiers JSON
 - [ ] **Export PDF** - Génération de rapports PDF côté client (jsPDF)

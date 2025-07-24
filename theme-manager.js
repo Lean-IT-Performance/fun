@@ -6,7 +6,6 @@
 class ThemeManager {
     constructor() {
         this.themes = {
-            AUTO: 'auto',
             LIGHT: 'light',
             DARK: 'dark'
         };
@@ -25,14 +24,23 @@ class ThemeManager {
     }
     
     /**
-     * Récupère le thème stocké ou utilise 'auto' par défaut
+     * Récupère le thème stocké ou détecte automatiquement
      */
     getStoredTheme() {
         try {
-            return localStorage.getItem('theme') || this.themes.AUTO;
+            const stored = localStorage.getItem('theme');
+            if (stored && (stored === this.themes.LIGHT || stored === this.themes.DARK)) {
+                return stored;
+            }
+            // Auto-détection selon les préférences système
+            return window.matchMedia('(prefers-color-scheme: dark)').matches 
+                ? this.themes.DARK 
+                : this.themes.LIGHT;
         } catch (error) {
-            console.warn('ThemeManager: Impossible de lire localStorage, utilisation du thème auto');
-            return this.themes.AUTO;
+            console.warn('ThemeManager: Impossible de lire localStorage, utilisation de la détection automatique');
+            return window.matchMedia('(prefers-color-scheme: dark)').matches 
+                ? this.themes.DARK 
+                : this.themes.LIGHT;
         }
     }
     
@@ -54,7 +62,7 @@ class ThemeManager {
         const html = document.documentElement;
         
         // Nettoie les classes existantes
-        html.classList.remove('theme-light', 'theme-dark', 'theme-auto');
+        html.classList.remove('theme-light', 'theme-dark');
         
         switch (theme) {
             case this.themes.LIGHT:
@@ -65,10 +73,10 @@ class ThemeManager {
                 html.classList.add('theme-dark');
                 html.style.colorScheme = 'dark';
                 break;
-            case this.themes.AUTO:
             default:
-                html.classList.add('theme-auto');
-                html.style.colorScheme = 'light dark';
+                // Par défaut, utilise le mode clair
+                html.classList.add('theme-light');
+                html.style.colorScheme = 'light';
                 break;
         }
         
@@ -121,16 +129,15 @@ class ThemeManager {
         switch (this.currentTheme) {
             case this.themes.LIGHT:
                 icon = '☀️';
-                text = 'Mode clair';
+                text = 'Passer en mode sombre';
                 break;
             case this.themes.DARK:
                 icon = '🌙';
-                text = 'Mode sombre';
+                text = 'Passer en mode clair';
                 break;
-            case this.themes.AUTO:
             default:
-                icon = '🌓';
-                text = 'Mode automatique';
+                icon = '☀️';
+                text = 'Passer en mode sombre';
                 break;
         }
         
@@ -143,21 +150,9 @@ class ThemeManager {
      * Bascule entre les thèmes
      */
     toggleTheme() {
-        let nextTheme;
-        
-        switch (this.currentTheme) {
-            case this.themes.AUTO:
-                nextTheme = this.themes.LIGHT;
-                break;
-            case this.themes.LIGHT:
-                nextTheme = this.themes.DARK;
-                break;
-            case this.themes.DARK:
-                nextTheme = this.themes.AUTO;
-                break;
-            default:
-                nextTheme = this.themes.AUTO;
-        }
+        const nextTheme = this.currentTheme === this.themes.LIGHT 
+            ? this.themes.DARK 
+            : this.themes.LIGHT;
         
         this.setStoredTheme(nextTheme);
         this.applyTheme(nextTheme);
@@ -180,37 +175,18 @@ class ThemeManager {
     }
     
     /**
-     * Écoute les changements de préférence système
+     * Écoute les changements de préférence système (pour la détection initiale uniquement)
      */
     setupMediaQueryListener() {
-        if (!window.matchMedia) return;
-        
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        
-        const handleChange = () => {
-            if (this.currentTheme === this.themes.AUTO) {
-                // Force un re-rendu en mode auto
-                this.applyTheme(this.themes.AUTO);
-            }
-        };
-        
-        // Support pour les anciens navigateurs
-        if (mediaQuery.addListener) {
-            mediaQuery.addListener(handleChange);
-        } else {
-            mediaQuery.addEventListener('change', handleChange);
-        }
+        // Cette méthode est conservée pour compatibilité mais n'est plus nécessaire
+        // car on utilise maintenant un système à 2 modes uniquement
+        console.log('✨ Gestionnaire de thème initialisé : Mode binaire (Clair/Sombre)');
     }
     
     /**
      * Retourne le thème effectif actuellement appliqué
      */
     getEffectiveTheme() {
-        if (this.currentTheme === this.themes.AUTO) {
-            return window.matchMedia('(prefers-color-scheme: dark)').matches 
-                ? this.themes.DARK 
-                : this.themes.LIGHT;
-        }
         return this.currentTheme;
     }
     
@@ -218,7 +194,7 @@ class ThemeManager {
      * Vérifie si le mode sombre est actif
      */
     isDarkMode() {
-        return this.getEffectiveTheme() === this.themes.DARK;
+        return this.currentTheme === this.themes.DARK;
     }
 }
 
