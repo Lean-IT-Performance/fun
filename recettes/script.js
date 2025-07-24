@@ -84,6 +84,9 @@ class RecipeGenerator {
             });
         });
         
+        // Bouton génération IA
+        const aiButton = document.getElementById('generate-ai-recipe');
+        aiButton.addEventListener('click', () => this.generateAIRecipe());
 
         // Gestion des paramètres avancés
         this.bindAdvancedOptions();

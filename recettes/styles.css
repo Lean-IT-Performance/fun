@@ -552,7 +552,7 @@ main {
 
 .kids-level {
     text-align: center;
-    margin-top: 1rem;
+    margin-top: 1rem 0;
 }
 
 .kids-badge {
