@@ -605,11 +605,411 @@ body {
 }
 
 /* =================================================================
-   🌙 MODE SOMBRE (Préparation pour implémentation future)
+   🌙 MODE SOMBRE - Thème sombre automatique et manuel
    ================================================================= */
 
+/* Variables sombres pour le mode sombre forcé */
+.theme-dark {
+  /* ===== COULEURS SOMBRES ===== */
+  
+  /* Couleurs principales - ajustées pour le sombre */
+  --color-primary: #7c9aee;
+  --color-primary-dark: #8b64c7;
+  --color-primary-light: #a5b7ef;
+  --color-primary-alpha: rgba(124, 154, 238, 0.15);
+  
+  /* Couleurs secondaires */
+  --color-secondary: #57d689;
+  --color-secondary-dark: #4bb876;
+  --color-secondary-light: #73de9a;
+  
+  /* Couleurs d'état */
+  --color-success: #57d689;
+  --color-warning: #f29d4e;
+  --color-error: #ff7979;
+  --color-info: #6bb6ff;
+  
+  /* Couleurs neutres inversées */
+  --color-white: #1a1a1a;
+  --color-gray-50: #1a1a1a;
+  --color-gray-100: #262626;
+  --color-gray-200: #333333;
+  --color-gray-300: #404040;
+  --color-gray-400: #525252;
+  --color-gray-500: #737373;
+  --color-gray-600: #a3a3a3;
+  --color-gray-700: #d4d4d4;
+  --color-gray-800: #e5e5e5;
+  --color-gray-900: #f5f5f5;
+  
+  /* Couleurs de texte */
+  --text-primary: #f5f5f5;
+  --text-secondary: #d4d4d4;
+  --text-muted: #a3a3a3;
+  --text-inverse: #1a1a1a;
+  
+  /* Couleurs de fond */
+  --bg-primary: #262626;
+  --bg-secondary: #1a1a1a;
+  --bg-muted: #333333;
+  --bg-dark: #f5f5f5;
+  
+  /* ===== OMBRES ADAPTÉES ===== */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Mode automatique suivant les préférences système */
 @media (prefers-color-scheme: dark) {
-  /* Les variables seront redéfinies ici quand le mode sombre sera implémenté */
+  .theme-auto {
+    /* ===== COULEURS SOMBRES ===== */
+    
+    /* Couleurs principales - ajustées pour le sombre */
+    --color-primary: #7c9aee;
+    --color-primary-dark: #8b64c7;
+    --color-primary-light: #a5b7ef;
+    --color-primary-alpha: rgba(124, 154, 238, 0.15);
+    
+    /* Couleurs secondaires */
+    --color-secondary: #57d689;
+    --color-secondary-dark: #4bb876;
+    --color-secondary-light: #73de9a;
+    
+    /* Couleurs d'état */
+    --color-success: #57d689;
+    --color-warning: #f29d4e;
+    --color-error: #ff7979;
+    --color-info: #6bb6ff;
+    
+    /* Couleurs neutres inversées */
+    --color-white: #1a1a1a;
+    --color-gray-50: #1a1a1a;
+    --color-gray-100: #262626;
+    --color-gray-200: #333333;
+    --color-gray-300: #404040;
+    --color-gray-400: #525252;
+    --color-gray-500: #737373;
+    --color-gray-600: #a3a3a3;
+    --color-gray-700: #d4d4d4;
+    --color-gray-800: #e5e5e5;
+    --color-gray-900: #f5f5f5;
+    
+    /* Couleurs de texte */
+    --text-primary: #f5f5f5;
+    --text-secondary: #d4d4d4;
+    --text-muted: #a3a3a3;
+    --text-inverse: #1a1a1a;
+    
+    /* Couleurs de fond */
+    --bg-primary: #262626;
+    --bg-secondary: #1a1a1a;
+    --bg-muted: #333333;
+    --bg-dark: #f5f5f5;
+    
+    /* ===== OMBRES ADAPTÉES ===== */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Ajustements spécifiques pour le mode sombre */
+  body {
+    color-scheme: dark;
+  }
+  
+  /* Amélioration du contraste pour les éléments interactifs */
+  .btn-primary {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    border-color: var(--color-primary);
+  }
+  
+  .btn-secondary {
+    background: var(--color-secondary);
+    border-color: var(--color-secondary);
+  }
+  
+  .btn-outline {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  
+  .btn-outline:hover:not(:disabled) {
+    background: var(--color-primary);
+    color: var(--text-inverse);
+  }
+  
+  /* Formulaires en mode sombre */
+  .form-input,
+  .form-select,
+  .form-textarea {
+    background: var(--bg-primary);
+    border-color: var(--color-gray-400);
+    color: var(--text-primary);
+  }
+  
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: var(--text-muted);
+  }
+  
+  /* Cartes avec bordure visible en mode sombre */
+  .card {
+    border: var(--border-width) solid var(--color-gray-300);
+  }
+  
+  /* Alertes ajustées */
+  .alert-success {
+    background: rgba(87, 214, 137, 0.15);
+    border-color: var(--color-success);
+  }
+  
+  .alert-warning {
+    background: rgba(242, 157, 78, 0.15);
+    border-color: var(--color-warning);
+  }
+  
+  .alert-error {
+    background: rgba(255, 121, 121, 0.15);
+    border-color: var(--color-error);
+  }
+  
+  .alert-info {
+    background: rgba(107, 182, 255, 0.15);
+    border-color: var(--color-info);
+  }
+  
+  /* Badges en mode sombre */
+  .badge-primary {
+    background: var(--color-primary-alpha);
+    color: var(--color-primary-light);
+  }
+  
+  .badge-success {
+    background: rgba(87, 214, 137, 0.15);
+    color: var(--color-secondary-light);
+  }
+  
+  .badge-warning {
+    background: rgba(242, 157, 78, 0.15);
+    color: var(--color-warning);
+  }
+  
+  .badge-error {
+    background: rgba(255, 121, 121, 0.15);
+    color: var(--color-error);
+  }
+  
+  /* Loading spinner adapté */
+  .loading {
+    border-color: var(--color-gray-400);
+    border-top-color: var(--color-primary);
+  }
+  
+  /* Skeleton en mode sombre */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--color-gray-300) 25%,
+      var(--color-gray-200) 50%,
+      var(--color-gray-300) 75%
+    );
+  }
+}
+
+/* Styles communs pour les modes sombre (forcé ET automatique) */
+.theme-dark,
+.theme-auto {
+  @media (prefers-color-scheme: dark) {
+    /* Ajustements spécifiques pour le mode sombre */
+    body {
+      color-scheme: dark;
+    }
+    
+    /* Amélioration du contraste pour les éléments interactifs */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+      border-color: var(--color-primary);
+    }
+    
+    .btn-secondary {
+      background: var(--color-secondary);
+      border-color: var(--color-secondary);
+    }
+    
+    .btn-outline {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+    
+    .btn-outline:hover:not(:disabled) {
+      background: var(--color-primary);
+      color: var(--text-inverse);
+    }
+    
+    /* Formulaires en mode sombre */
+    .form-input,
+    .form-select,
+    .form-textarea {
+      background: var(--bg-primary);
+      border-color: var(--color-gray-400);
+      color: var(--text-primary);
+    }
+    
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--text-muted);
+    }
+    
+    /* Cartes avec bordure visible en mode sombre */
+    .card {
+      border: var(--border-width) solid var(--color-gray-300);
+    }
+    
+    /* Alertes ajustées */
+    .alert-success {
+      background: rgba(87, 214, 137, 0.15);
+      border-color: var(--color-success);
+    }
+    
+    .alert-warning {
+      background: rgba(242, 157, 78, 0.15);
+      border-color: var(--color-warning);
+    }
+    
+    .alert-error {
+      background: rgba(255, 121, 121, 0.15);
+      border-color: var(--color-error);
+    }
+    
+    .alert-info {
+      background: rgba(107, 182, 255, 0.15);
+      border-color: var(--color-info);
+    }
+    
+    /* Badges en mode sombre */
+    .badge-primary {
+      background: var(--color-primary-alpha);
+      color: var(--color-primary-light);
+    }
+    
+    .badge-success {
+      background: rgba(87, 214, 137, 0.15);
+      color: var(--color-secondary-light);
+    }
+    
+    .badge-warning {
+      background: rgba(242, 157, 78, 0.15);
+      color: var(--color-warning);
+    }
+    
+    .badge-error {
+      background: rgba(255, 121, 121, 0.15);
+      color: var(--color-error);
+    }
+    
+    /* Loading spinner adapté */
+    .loading {
+      border-color: var(--color-gray-400);
+      border-top-color: var(--color-primary);
+    }
+    
+    /* Skeleton en mode sombre */
+    .skeleton {
+      background: linear-gradient(
+        90deg,
+        var(--color-gray-300) 25%,
+        var(--color-gray-200) 50%,
+        var(--color-gray-300) 75%
+      );
+    }
+  }
+}
+
+/* Mode sombre forcé (sans media query) */
+.theme-dark {
+  /* Réapplication des styles sombres même si le système préfère le clair */
+  body {
+    color-scheme: dark;
+  }
+  
+  /* Tous les ajustements sont déjà appliqués via les variables CSS */
+}
+
+/* =================================================================
+   🌙 BOUTON DE BASCULEMENT DE THÈME
+   ================================================================= */
+
+.theme-toggle {
+  position: fixed;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: var(--z-fixed);
+  
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-lg);
+  
+  font-size: var(--text-xl);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  border: var(--border-width) solid var(--color-gray-300);
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+  background: var(--color-primary);
+  color: var(--text-inverse);
+  border-color: var(--color-primary);
+}
+
+.theme-toggle:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+}
+
+/* Positionnement dans le header si présent */
+.header .theme-toggle {
+  position: static;
+  margin-left: auto;
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-inverse);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.header .theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: var(--text-inverse);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive du bouton */
+@media (max-width: 640px) {
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
+    font-size: var(--text-lg);
+    top: var(--space-3);
+    right: var(--space-3);
+  }
 }
 
 /* =================================================================
