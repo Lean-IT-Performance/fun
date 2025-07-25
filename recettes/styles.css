@@ -80,19 +80,55 @@ main {
     border-color: #48bb78;
 }
 
+/* ===== BOUTONS MODERNES ===== */
+
 .btn-primary {
-    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #48bb78 100%);
     color: white;
-    padding: 0.75rem 1.5rem;
+    padding: 0.875rem 2rem;
     border: none;
-    border-radius: 8px;
-    font-weight: 600;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
 }
 
 .btn-primary:hover {
-    transform: translateY(-1px);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #7c9aee 0%, #8b64c7 50%, #57d689 100%);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) scale(0.98);
+    transition-duration: 0.1s;
+}
+
+.btn-primary:focus-visible {
+    outline: 3px solid rgba(102, 126, 234, 0.5);
+    outline-offset: 3px;
 }
 
 /* Quick Ingredients */
@@ -108,18 +144,58 @@ main {
 }
 
 .suggestion-btn {
-    background: #f7fafc;
-    border: 2px solid #e2e8f0;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.75rem 1.25rem;
+    border-radius: 25px;
     cursor: pointer;
     font-size: 0.9rem;
-    transition: all 0.2s ease;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.suggestion-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(72, 187, 120, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.suggestion-btn:hover::before {
+    opacity: 1;
 }
 
 .suggestion-btn:hover {
-    background: #edf2f7;
-    border-color: #48bb78;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.4);
+    color: #667eea;
+}
+
+.suggestion-btn:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+.suggestion-btn:disabled {
+    opacity: 0.5;
+    transform: none;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.suggestion-btn:disabled:hover {
+    transform: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Selected Ingredients */
@@ -152,29 +228,91 @@ main {
 }
 
 .ingredient-tag {
-    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #48bb78 100%);
     color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    padding: 0.75rem 1.25rem;
+    border-radius: 25px;
     font-size: 0.9rem;
+    font-weight: 600;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
     animation: slideIn 0.3s ease;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ingredient-tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1), 
+        transparent, 
+        rgba(255, 255, 255, 0.1));
+    border-radius: 25px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.ingredient-tag:hover::before {
+    opacity: 1;
+}
+
+.ingredient-tag:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #7c9aee 0%, #8b64c7 50%, #57d689 100%);
 }
 
 .ingredient-tag .remove-btn {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
+    position: relative;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     color: white;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.ingredient-tag .remove-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(245, 101, 101, 0.3), rgba(220, 38, 38, 0.3));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.ingredient-tag .remove-btn:hover::before {
+    opacity: 1;
+}
+
+.ingredient-tag .remove-btn:hover {
+    transform: scale(1.2) rotate(90deg);
+    background: rgba(245, 101, 101, 0.9);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 16px rgba(245, 101, 101, 0.4);
+}
+
+.ingredient-tag .remove-btn:active {
+    transform: scale(1.1) rotate(90deg);
 }
 
 @keyframes slideIn {
@@ -324,26 +462,60 @@ main {
 }
 
 .btn-ai {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: 2px solid #667eea;
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    border: none;
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.3);
+    backdrop-filter: blur(15px);
+    overflow: hidden;
+}
+
+.btn-ai::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        transparent 50%, 
+        rgba(255, 255, 255, 0.1) 100%);
+    transform: translateX(-100%) skewX(-15deg);
+    transition: transform 0.8s ease;
+}
+
+.btn-ai:hover::before {
+    transform: translateX(100%) skewX(-15deg);
 }
 
 .btn-ai:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 16px 50px rgba(102, 126, 234, 0.5);
+    background: linear-gradient(135deg, #7c9aee 0%, #8b64c7 50%, #f9a8d4 100%);
+}
+
+.btn-ai:active:not(:disabled) {
+    transform: translateY(-2px) scale(0.98);
 }
 
 .btn-ai:disabled {
-    background: #e2e8f0;
+    background: linear-gradient(135deg, #e2e8f0, #cbd5e0);
     color: #a0aec0;
     cursor: not-allowed;
-    border-color: #e2e8f0;
+    box-shadow: none;
+    opacity: 0.6;
 }
 
+.btn-ai:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
 
 /* Loading animation for AI button */
 .btn-ai.loading {
     pointer-events: none;
+    animation: aiPulse 2s ease-in-out infinite;
 }
 
 .btn-ai.loading::after {
@@ -353,11 +525,23 @@ main {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    animation: loading 1.5s infinite;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.4), 
+        transparent);
+    animation: aiLoading 1.5s infinite;
 }
 
-@keyframes loading {
+@keyframes aiPulse {
+    0%, 100% { 
+        box-shadow: 0 12px 40px rgba(102, 126, 234, 0.3);
+    }
+    50% { 
+        box-shadow: 0 16px 50px rgba(102, 126, 234, 0.6);
+    }
+}
+
+@keyframes aiLoading {
     0% { left: -100%; }
     100% { left: 100%; }
 }
@@ -871,23 +1055,110 @@ footer p {
 }
 
 .recipe-actions .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    position: relative;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #4facfe 100%);
+    padding: 1.25rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 15px 35px rgba(240, 147, 251, 0.4);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+}
+
+.recipe-actions .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.2), 
+        rgba(255, 255, 255, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.recipe-actions .btn-primary:hover::before {
+    opacity: 1;
 }
 
 .recipe-actions .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 20px 50px rgba(240, 147, 251, 0.6);
+    background: linear-gradient(135deg, #f9a8d4 0%, #f87171 50%, #60a5fa 100%);
 }
 
-/* Responsive Design */
+.recipe-actions .btn-primary:active {
+    transform: translateY(-3px) scale(1.02);
+}
+
+/* ===== ADAPTATIONS POUR LE MODE SOMBRE ===== */
+
+.theme-dark .btn-primary {
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+}
+
+.theme-dark .suggestion-btn {
+    background: rgba(64, 64, 64, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #f0f0f0;
+}
+
+.theme-dark .suggestion-btn:hover {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.6);
+    color: #7c9aee;
+}
+
+.theme-dark .ingredient-tag {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.theme-dark .btn-ai {
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+}
+
+.theme-dark .recipe-actions .btn-primary {
+    box-shadow: 0 15px 35px rgba(240, 147, 251, 0.3);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
     }
+    
+    .btn-primary {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .suggestion-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .ingredient-tag {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .ingredient-tag .remove-btn {
+        width: 20px;
+        height: 20px;
+        font-size: 0.8rem;
+    }
+    
+    .recipe-actions .btn-primary {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+}
     
     .ingredient-input {
         flex-direction: column;
