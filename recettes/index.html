@@ -9,41 +9,63 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header">
+    <header class="header" role="banner" id="navigation">
         <div class="container">
-            <nav class="breadcrumb">
-                <a href="../">🏠 Accueil</a>
-                <span>›</span>
-                <span>Mes Recettes</span>
+            <nav class="breadcrumb" role="navigation" aria-label="Fil d'Ariane">
+                <a href="../" aria-label="Retour à la page d'accueil">🏠 Accueil</a>
+                <span aria-hidden="true">›</span>
+                <span aria-current="page">Mes Recettes</span>
             </nav>
-            <h1>🍳 Mes Recettes</h1>
+            <h1><span role="img" aria-label="Icône cuisine">🍳</span> Mes Recettes</h1>
             <p class="tagline">Transformez vos ingrédients en délicieux repas</p>
         </div>
     </header>
 
-    <main class="container">
-        <section class="ingredients-input">
+    <main class="container" role="main" id="main-content">
+        <section class="ingredients-input" aria-labelledby="ingredients-heading">
             <div class="card">
-                <h2 class="card-title">Que trouvez-vous dans votre frigo ?</h2>
+                <h2 class="card-title" id="ingredients-heading">Que trouvez-vous dans votre frigo ?</h2>
                 <p class="card-description">Ajoutez les ingrédients disponibles et découvrez les recettes possibles</p>
                 
                 <div class="input-section">
                     <div class="ingredient-input">
-                        <input type="text" id="ingredient-input" placeholder="Ex: tomates, fromage, pâtes..." autocomplete="off">
-                        <button id="add-ingredient" class="btn btn-primary">Ajouter</button>
+                        <label for="ingredient-input" class="sr-only">Ingrédient à ajouter</label>
+                        <input type="text" id="ingredient-input" placeholder="Ex: tomates, fromage, pâtes..." 
+                               autocomplete="off" aria-describedby="ingredient-help">
+                        <div id="ingredient-help" class="sr-only">Tapez le nom d'un ingrédient et appuyez sur Ajouter ou Entrée</div>
+                        <button id="add-ingredient" class="btn btn-primary" aria-describedby="add-ingredient-desc">
+                            Ajouter
+                            <span id="add-ingredient-desc" class="sr-only">Ajouter l'ingrédient à votre liste</span>
+                        </button>
                     </div>
                     
                     <div class="quick-ingredients">
-                        <h4>Suggestions rapides :</h4>
-                        <div class="ingredient-suggestions">
-                            <button class="suggestion-btn" data-ingredient="œufs">🥚 Œufs</button>
-                            <button class="suggestion-btn" data-ingredient="tomates">🍅 Tomates</button>
-                            <button class="suggestion-btn" data-ingredient="fromage">🧀 Fromage</button>
-                            <button class="suggestion-btn" data-ingredient="pâtes">🍝 Pâtes</button>
-                            <button class="suggestion-btn" data-ingredient="riz">🍚 Riz</button>
-                            <button class="suggestion-btn" data-ingredient="pommes de terre">🥔 Pommes de terre</button>
-                            <button class="suggestion-btn" data-ingredient="poulet">🐔 Poulet</button>
-                            <button class="suggestion-btn" data-ingredient="oignons">🧅 Oignons</button>
+                        <h4 id="suggestions-heading">Suggestions rapides :</h4>
+                        <div class="ingredient-suggestions" role="group" aria-labelledby="suggestions-heading">
+                            <button class="suggestion-btn" data-ingredient="œufs" aria-label="Ajouter les œufs">
+                                <span role="img" aria-hidden="true">🥚</span> Œufs
+                            </button>
+                            <button class="suggestion-btn" data-ingredient="tomates" aria-label="Ajouter les tomates">
+                                <span role="img" aria-hidden="true">🍅</span> Tomates
+                            </button>
+                            <button class="suggestion-btn" data-ingredient="fromage" aria-label="Ajouter le fromage">
+                                <span role="img" aria-hidden="true">🧀</span> Fromage
+                            </button>
+                            <button class="suggestion-btn" data-ingredient="pâtes" aria-label="Ajouter les pâtes">
+                                <span role="img" aria-hidden="true">🍝</span> Pâtes
+                            </button>
+                            <button class="suggestion-btn" data-ingredient="riz" aria-label="Ajouter le riz">
+                                <span role="img" aria-hidden="true">🍚</span> Riz
+                            </button>
+                            <button class="suggestion-btn" data-ingredient="pommes de terre" aria-label="Ajouter les pommes de terre">
+                                <span role="img" aria-hidden="true">🥔</span> Pommes de terre
+                            </button>
+                            <button class="suggestion-btn" data-ingredient="poulet" aria-label="Ajouter le poulet">
+                                <span role="img" aria-hidden="true">🐔</span> Poulet
+                            </button>
+                            <button class="suggestion-btn" data-ingredient="oignons" aria-label="Ajouter les oignons">
+                                <span role="img" aria-hidden="true">🧅</span> Oignons
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -224,6 +246,7 @@
 
     <script src="../theme-manager.js"></script>
     <script src="../animation-manager.js"></script>
+    <script src="../accessibility-manager.js"></script>
     <script src="../config.js"></script>
     <script src="script.js"></script>
 </body>

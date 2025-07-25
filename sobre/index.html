@@ -10,39 +10,44 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <header class="header">
+    <header class="header" role="banner" id="navigation">
         <div class="container">
-            <nav class="breadcrumb">
-                <a href="../">🏠 Accueil</a>
-                <span>›</span>
-                <span>Sobre</span>
+            <nav class="breadcrumb" role="navigation" aria-label="Fil d'Ariane">
+                <a href="../" aria-label="Retour à la page d'accueil">🏠 Accueil</a>
+                <span aria-hidden="true">›</span>
+                <span aria-current="page">Sobre</span>
             </nav>
-            <h1>🍺 Sobre</h1>
+            <h1><span role="img" aria-label="Icône bière">🍺</span> Sobre</h1>
             <p class="tagline">Calculateur de Taux d'Alcoolémie</p>
         </div>
     </header>
 
-    <main>
-        <div class="alert alert-warning" data-animate="slide-in-down">
-            <p><strong>⚠️ Avertissement :</strong> Cette application fournit des estimations uniquement. Ne vous fiez jamais à ces calculs pour prendre le volant. Consultez toujours un professionnel de santé.</p>
+    <main role="main" id="main-content">
+        <div class="alert alert-warning" data-animate="slide-in-down" role="alert" aria-live="polite">
+            <p><strong><span role="img" aria-label="Avertissement">⚠️</span> Avertissement :</strong> Cette application fournit des estimations uniquement. Ne vous fiez jamais à ces calculs pour prendre le volant. Consultez toujours un professionnel de santé.</p>
         </div>
 
-        <section id="profile-section" class="card" data-animate="fade-in-up">
-            <h2 class="card-title">Votre Profil</h2>
-            <form id="profile-form">
-                <div class="form-group">
-                    <label for="weight" class="form-label">Poids (kg):</label>
-                    <input type="number" id="weight" class="form-input" min="30" max="200" step="1" required>
-                </div>
+        <section id="profile-section" class="card" data-animate="fade-in-up" aria-labelledby="profile-heading">
+            <h2 class="card-title" id="profile-heading">Votre Profil</h2>
+            <form id="profile-form" aria-describedby="profile-description">
+                <p id="profile-description" class="sr-only">Remplissez vos informations personnelles pour calculer votre taux d'alcoolémie de manière précise</p>
                 
                 <div class="form-group">
-                    <label for="gender" class="form-label">Sexe:</label>
-                    <select id="gender" class="form-select" required>
-                        <option value="">Sélectionner</option>
+                    <label for="weight" class="form-label" data-required="true">Poids (kg)</label>
+                    <input type="number" id="weight" class="form-input" min="30" max="200" step="1" required 
+                           aria-describedby="weight-help" aria-invalid="false">
+                    <div id="weight-help" class="form-help">Votre poids en kilogrammes (entre 30 et 200 kg)</div>
+                </div>
+                
+                <fieldset class="form-group">
+                    <legend class="form-label">Sexe</legend>
+                    <select id="gender" class="form-select" required aria-describedby="gender-help" aria-invalid="false">
+                        <option value="">Sélectionner votre sexe</option>
                         <option value="male">Homme</option>
                         <option value="female">Femme</option>
                     </select>
-                </div>
+                    <div id="gender-help" class="form-help">Nécessaire pour le calcul précis du taux d'alcoolémie</div>
+                </fieldset>
                 
                 <div class="form-group">
                     <label for="driver-type" class="form-label">Type de conducteur:</label>
@@ -338,12 +343,13 @@
         </div>
     </main>
 
-    <footer>
+    <footer role="contentinfo" id="footer">
         <p>Sobre utilise la formule scientifique de Widmark pour les calculs. Les résultats sont des estimations uniquement.</p>
     </footer>
 
     <script src="../theme-manager.js"></script>
     <script src="../animation-manager.js"></script>
+    <script src="../accessibility-manager.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

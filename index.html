@@ -9,80 +9,95 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header">
+    <header class="header" role="banner" id="navigation">
         <div class="container">
             <h1>Fun Lean IT Performance</h1>
             <p class="tagline">Des outils web simples et pratiques</p>
         </div>
     </header>
 
-    <main class="container">
+    <main class="container" role="main" id="main-content">
         <section class="hero" data-animate="fade-in">
             <h2 class="typing-effect">Bienvenue sur notre plateforme d'outils</h2>
             <p data-animate="fade-in" data-delay="500">Découvrez notre collection d'applications web conçues pour vous faciliter la vie quotidienne</p>
         </section>
 
-        <section class="grid grid-cols-2 mt-8" data-stagger="200">
-            <div class="card" data-animate="slide-in-left">
+        <section class="grid grid-cols-2 mt-8" data-stagger="200" aria-label="Applications disponibles">
+            <article class="card" data-animate="slide-in-left">
                 <div class="card-header">
-                    <div class="text-4xl mb-4 icon-rotate">🍷</div>
+                    <div class="text-4xl mb-4 icon-rotate" role="img" aria-label="Icône vin">🍷</div>
                     <h3 class="card-title">Sobre</h3>
                     <p class="card-description">Calculateur scientifique de taux d'alcoolémie basé sur la formule de Widmark pour une consommation responsable</p>
                 </div>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="badge badge-primary">Calcul en temps réel</span>
-                    <span class="badge badge-primary">Prédictions de sobriété</span>
-                    <span class="badge badge-primary">Graphiques d'évolution</span>
+                <div class="flex flex-wrap gap-2 mb-6" role="list" aria-label="Fonctionnalités de Sobre">
+                    <span class="badge badge-primary" role="listitem">Calcul en temps réel</span>
+                    <span class="badge badge-primary" role="listitem">Prédictions de sobriété</span>
+                    <span class="badge badge-primary" role="listitem">Graphiques d'évolution</span>
                 </div>
-                <a href="sobre/index.html" class="btn btn-primary">Utiliser Sobre</a>
-            </div>
+                <a href="sobre/index.html" class="btn btn-primary" aria-describedby="sobre-desc">
+                    Utiliser Sobre
+                    <span class="sr-only" id="sobre-desc">Ouvre l'application calculateur d'alcoolémie</span>
+                </a>
+            </article>
 
-            <div class="card" data-animate="slide-in-right">
+            <article class="card" data-animate="slide-in-right">
                 <div class="card-header">
-                    <div class="text-4xl mb-4 icon-rotate">🍳</div>
+                    <div class="text-4xl mb-4 icon-rotate" role="img" aria-label="Icône cuisine">🍳</div>
                     <h3 class="card-title">Mes Recettes</h3>
                     <p class="card-description">Générateur de recettes intelligent basé sur les ingrédients disponibles dans votre frigo</p>
                 </div>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="badge badge-success">IA culinaire</span>
-                    <span class="badge badge-success">Anti-gaspillage</span>
-                    <span class="badge badge-success">Suggestions personnalisées</span>
+                <div class="flex flex-wrap gap-2 mb-6" role="list" aria-label="Fonctionnalités de Mes Recettes">
+                    <span class="badge badge-success" role="listitem">IA culinaire</span>
+                    <span class="badge badge-success" role="listitem">Anti-gaspillage</span>
+                    <span class="badge badge-success" role="listitem">Suggestions personnalisées</span>
                 </div>
-                <a href="recettes/index.html" class="btn btn-primary">Découvrir les recettes</a>
-            </div>
+                <a href="recettes/index.html" class="btn btn-primary" aria-describedby="recettes-desc">
+                    Découvrir les recettes
+                    <span class="sr-only" id="recettes-desc">Ouvre l'application générateur de recettes</span>
+                </a>
+            </article>
         </section>
 
-        <section class="about" data-animate="fade-in-up">
-            <h2>À propos</h2>
+        <section class="about" data-animate="fade-in-up" aria-labelledby="about-heading">
+            <h2 id="about-heading">À propos</h2>
             <p>Notre mission est de créer des outils web simples, efficaces et respectueux de votre vie privée. Toutes nos applications fonctionnent entièrement côté client, garantissant que vos données restent sur votre appareil.</p>
             
-            <div class="grid grid-cols-3 mt-6">
-                <div class="text-center">
-                    <h4 class="text-lg font-semibold mb-2">🔒 Confidentialité</h4>
+            <div class="grid grid-cols-3 mt-6" role="list" aria-label="Nos valeurs">
+                <div class="text-center" role="listitem">
+                    <h4 class="text-lg font-semibold mb-2">
+                        <span role="img" aria-label="Cadenas">🔒</span> Confidentialité
+                    </h4>
                     <p class="text-secondary">Aucune donnée n'est envoyée sur nos serveurs</p>
                 </div>
-                <div class="text-center">
-                    <h4 class="text-lg font-semibold mb-2">⚡ Performance</h4>
+                <div class="text-center" role="listitem">
+                    <h4 class="text-lg font-semibold mb-2">
+                        <span role="img" aria-label="Éclair">⚡</span> Performance
+                    </h4>
                     <p class="text-secondary">Applications légères et rapides</p>
                 </div>
-                <div class="text-center">
-                    <h4 class="text-lg font-semibold mb-2">📱 Responsive</h4>
+                <div class="text-center" role="listitem">
+                    <h4 class="text-lg font-semibold mb-2">
+                        <span role="img" aria-label="Téléphone mobile">📱</span> Responsive
+                    </h4>
                     <p class="text-secondary">Optimisé pour tous les appareils</p>
                 </div>
             </div>
         </section>
 
-        <section class="mt-12">
-            <div class="card text-center">
-                <div class="text-4xl mb-4">⚙️</div>
-                <h3 class="card-title">Administration</h3>
+        <section class="mt-12" aria-labelledby="admin-heading">
+            <article class="card text-center">
+                <div class="text-4xl mb-4" role="img" aria-label="Icône administration">⚙️</div>
+                <h3 class="card-title" id="admin-heading">Administration</h3>
                 <p class="card-description mb-6">Console de monitoring des coûts d'API et gestion du système</p>
-                <a href="admin/index.html" class="btn btn-outline">Accès Admin</a>
-            </div>
+                <a href="admin/index.html" class="btn btn-outline" aria-describedby="admin-desc">
+                    Accès Admin
+                    <span class="sr-only" id="admin-desc">Ouvre la console d'administration</span>
+                </a>
+            </article>
         </section>
     </main>
 
-    <footer>
+    <footer role="contentinfo" id="footer">
         <div class="container">
             <p>&copy; 2025 Fun Lean IT Performance. Tous droits réservés.</p>
             <p>Applications web open source développées avec passion</p>
@@ -91,6 +106,7 @@
 
     <script src="theme-manager.js"></script>
     <script src="animation-manager.js"></script>
+    <script src="accessibility-manager.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

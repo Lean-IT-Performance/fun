@@ -11,41 +11,50 @@
 </head>
 <body>
     <!-- Écran de connexion -->
-    <div id="login-screen" class="login-container">
+    <div id="login-screen" class="login-container" role="main">
         <div class="login-box">
             <div class="logo">
-                <h1>🔐 Console Admin</h1>
+                <h1><span role="img" aria-label="Cadenas">🔐</span> Console Admin</h1>
                 <p>Fun Lean IT Performance</p>
             </div>
             
-            <form id="login-form" class="login-form">
+            <form id="login-form" class="login-form" aria-labelledby="login-heading">
+                <h2 id="login-heading" class="sr-only">Connexion à la console d'administration</h2>
+                
                 <div class="form-group">
-                    <label for="username" class="form-label">Nom d'utilisateur</label>
-                    <input type="text" id="username" name="username" class="form-input" required>
+                    <label for="username" class="form-label" data-required="true">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" class="form-input" required 
+                           aria-describedby="username-help" aria-invalid="false">
+                    <div id="username-help" class="sr-only">Saisissez votre nom d'utilisateur administrateur</div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="password" class="form-label">Mot de passe</label>
-                    <input type="password" id="password" name="password" class="form-input" required>
+                    <label for="password" class="form-label" data-required="true">Mot de passe</label>
+                    <input type="password" id="password" name="password" class="form-input" required 
+                           aria-describedby="password-help" aria-invalid="false">
+                    <div id="password-help" class="sr-only">Saisissez votre mot de passe administrateur</div>
                 </div>
                 
-                <button type="submit" class="btn-login">Se connecter</button>
+                <button type="submit" class="btn-login" aria-describedby="login-desc">
+                    Se connecter
+                    <span id="login-desc" class="sr-only">Accéder à la console d'administration</span>
+                </button>
                 
-                <div id="login-error" class="error-message" style="display: none;"></div>
+                <div id="login-error" class="error-message" style="display: none;" role="alert" aria-live="polite"></div>
             </form>
         </div>
     </div>
 
     <!-- Dashboard principal -->
-    <div id="admin-dashboard" class="dashboard" style="display: none;">
-        <header>
+    <div id="admin-dashboard" class="dashboard" style="display: none;" role="main">
+        <header role="banner" id="navigation">
             <div class="container">
-                <nav class="breadcrumb">
-                    <a href="../">🏠 Accueil</a>
-                    <span>›</span>
-                    <span>Console Admin</span>
+                <nav class="breadcrumb" role="navigation" aria-label="Fil d'Ariane">
+                    <a href="../" aria-label="Retour à la page d'accueil">🏠 Accueil</a>
+                    <span aria-hidden="true">›</span>
+                    <span aria-current="page">Console Admin</span>
                 </nav>
-                <h1>🔐 Console d'Administration</h1>
+                <h1 id="main-content"><span role="img" aria-label="Cadenas">🔐</span> Console d'Administration</h1>
                 <p>Monitoring des coûts d'usage OpenAI</p>
             </div>
         </header>
@@ -206,6 +215,7 @@
     <!-- Scripts -->
     <script src="../theme-manager.js"></script>
     <script src="../animation-manager.js"></script>
+    <script src="../accessibility-manager.js"></script>
     <script src="config.js" defer></script>
     <script src="api.js" defer></script>
     <script src="script.js" defer></script>

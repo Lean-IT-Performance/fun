@@ -22,7 +22,7 @@ const sites = {
         name: "Page d'accueil",
         localPath: ".",
         remoteDir: null, // Racine
-        files: ['index.html', 'styles.css', 'script.js', 'config.js', 'shared-styles.css', 'theme-manager.js', 'animation-manager.js', '.htaccess']
+        files: ['index.html', 'styles.css', 'script.js', 'config.js', 'shared-styles.css', 'theme-manager.js', 'animation-manager.js', 'accessibility-manager.js', '.htaccess']
     },
     sobre: {
         name: "Sobre - Calculateur d'alcoolémie",
