@@ -34,7 +34,7 @@ const sites = {
         name: "Mes Recettes - Générateur de recettes",
         localPath: "./recettes",
         remoteDir: "recettes",
-        files: ['index.html', 'styles.css', 'script.js', 'sw.js']
+        files: ['index.html', 'styles.css', 'script.js', 'recipe-export-manager.js', 'sw.js']
     },
     admin: {
         name: "Console Admin - Monitoring API",

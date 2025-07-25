@@ -602,6 +602,12 @@ class RecipeGenerator {
                 </div>
             </div>
         `;
+        
+        // Ajouter les boutons d'export après avoir affiché la recette
+        const recipeContainer = container.querySelector('.ai-recipe-result');
+        if (recipeContainer && window.recipeExportManager) {
+            window.recipeExportManager.addExportButtons(recipeContainer);
+        }
     }
 
     showNotification(message, type = 'info') {
