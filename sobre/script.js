@@ -1312,7 +1312,95 @@ class SobreApp {
             });
         });
     }
+
+    /**
+     * Sauvegarde la session actuelle dans l'historique
+     */
+    saveSessionToHistory() {
+        if (!this.currentSession || !this.drinks.length) {
+            return;
+        }
+
+        try {
+            const history = JSON.parse(localStorage.getItem('sobre_history') || '[]');
+            
+            const sessionData = {
+                id: this.currentSession.id || Date.now(),
+                startTime: this.currentSession.startTime,
+                endTime: new Date().toISOString(),
+                profile: { ...this.userProfile },
+                drinks: [...this.drinks],
+                maxBAC: Math.max(...this.drinks.map(d => this.calculateBACAtTime(d.time))),
+                sessionDuration: Date.now() - new Date(this.currentSession.startTime).getTime(),
+                totalAlcohol: this.drinks.reduce((sum, drink) => sum + this.calculatePureAlcohol(drink), 0)
+            };
+
+            // Ajouter à l'historique
+            history.push(sessionData);
+            
+            // Garder seulement les 50 dernières sessions
+            if (history.length > 50) {
+                history.splice(0, history.length - 50);
+            }
+
+            localStorage.setItem('sobre_history', JSON.stringify(history));
+            console.log('📊 Session sauvegardée dans l\'historique');
+            
+        } catch (error) {
+            console.error('Erreur lors de la sauvegarde de l\'historique :', error);
+        }
+    }
+
+    /**
+     * Récupère l'historique des sessions
+     */
+    getSessionHistory() {
+        try {
+            return JSON.parse(localStorage.getItem('sobre_history') || '[]');
+        } catch (error) {
+            console.error('Erreur lors de la lecture de l\'historique :', error);
+            return [];
+        }
+    }
+
+    /**
+     * Termine la session actuelle et la sauvegarde
+     */
+    endCurrentSession() {
+        if (this.currentSession) {
+            this.saveSessionToHistory();
+            this.currentSession = null;
+            this.drinks = [];
+            this.saveDrinks();
+            this.saveSession();
+            console.log('📊 Session terminée et sauvegardée');
+        }
+    }
+
+    /**
+     * Remet à zéro toutes les données (avec confirmation)
+     */
+    resetAllData() {
+        if (confirm('⚠️ Voulez-vous vraiment supprimer toutes les données ? Cette action est irréversible.')) {
+            // Sauvegarder la session actuelle avant de tout supprimer
+            this.saveSessionToHistory();
+            
+            // Supprimer toutes les données
+            localStorage.removeItem('sobre_profile');
+            localStorage.removeItem('sobre_drinks');
+            localStorage.removeItem('sobre_session');
+            
+            // Demander si on veut aussi supprimer l'historique
+            if (confirm('Voulez-vous également supprimer l\'historique des sessions ?')) {
+                localStorage.removeItem('sobre_history');
+            }
+            
+            // Recharger la page
+            location.reload();
+        }
+    }
 }
 
 // Initialisation de l'application
-const app = new SobreApp();
+const sobreApp = new SobreApp();
+window.sobreApp = sobreApp;

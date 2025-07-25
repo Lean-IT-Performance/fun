@@ -33,7 +33,7 @@ Cette roadmap présente l'évolution stratégique de la plateforme Fun Lean IT P
 - [x] **Animations fluides** - Micro-interactions pour améliorer l'engagement
 
 #### Applications existantes
-- [ ] **Sobre** - Export PDF des graphiques BAC, sauvegarde historique en galerie mobile
+- [x] **Sobre** - Export PDF des graphiques BAC, sauvegarde historique en galerie mobile
 - [ ] **Recettes** - Export PDF des recettes, sauvegarde historique en galerie mobile
 - [ ] **Mes Recettes** - Fonctionnalités avancées (voir section dédiée)
 - [ ] **Admin** - Export PDF des rapports de coûts, graphiques sauvegardables

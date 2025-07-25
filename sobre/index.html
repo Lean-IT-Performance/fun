@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../shared-styles.css">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <header class="header" role="banner" id="navigation">
@@ -215,6 +217,21 @@
                 <div class="chart-container">
                     <canvas id="bac-chart"></canvas>
                 </div>
+                
+                <div class="chart-actions" style="margin-top: 1rem; text-align: center; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button id="export-pdf" class="btn btn-primary" aria-describedby="export-pdf-desc">
+                        📄 Exporter en PDF
+                        <span id="export-pdf-desc" class="sr-only">Télécharger le graphique au format PDF</span>
+                    </button>
+                    <button id="save-to-gallery" class="btn btn-secondary" aria-describedby="save-gallery-desc">
+                        📱 Sauver en galerie
+                        <span id="save-gallery-desc" class="sr-only">Sauvegarder le graphique dans la galerie mobile</span>
+                    </button>
+                    <button id="export-history" class="btn btn-outline" aria-describedby="export-history-desc">
+                        📊 Historique PDF
+                        <span id="export-history-desc" class="sr-only">Exporter l'historique complet des sessions</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Onglet Paramètres -->
@@ -350,6 +367,7 @@
     <script src="../theme-manager.js"></script>
     <script src="../animation-manager.js"></script>
     <script src="../accessibility-manager.js"></script>
+    <script src="export-manager.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

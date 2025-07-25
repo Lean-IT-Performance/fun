@@ -15,7 +15,7 @@ const sites = {
     sobre: {
         name: "Sobre - Calculateur d'alcoolémie",
         localPath: "./sobre",
-        files: ['index.html', 'styles.css', 'script.js', 'CLAUDE.md']
+        files: ['index.html', 'styles.css', 'script.js', 'export-manager.js', 'CLAUDE.md']
     },
     recettes: {
         name: "Mes Recettes - Générateur de recettes",
