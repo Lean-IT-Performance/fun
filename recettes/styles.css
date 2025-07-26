@@ -115,13 +115,11 @@ main {
 }
 
 .btn-primary:hover {
-    transform: translateY(-3px) scale(1.02);
     box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
     background: linear-gradient(135deg, #7c9aee 0%, #8b64c7 50%, #57d689 100%);
 }
 
 .btn-primary:active {
-    transform: translateY(-1px) scale(0.98);
     transition-duration: 0.1s;
 }
 
@@ -175,14 +173,12 @@ main {
 }
 
 .suggestion-btn:hover {
-    transform: translateY(-2px) scale(1.05);
     box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
     border-color: rgba(102, 126, 234, 0.4);
     color: #667eea;
 }
 
 .suggestion-btn:active {
-    transform: translateY(-1px) scale(1.02);
 }
 
 .suggestion-btn:disabled {
@@ -193,7 +189,6 @@ main {
 }
 
 .suggestion-btn:disabled:hover {
-    transform: none;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -265,7 +260,6 @@ main {
 }
 
 .ingredient-tag:hover {
-    transform: translateY(-2px) scale(1.05);
     box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
     background: linear-gradient(135deg, #7c9aee 0%, #8b64c7 50%, #57d689 100%);
 }
@@ -304,14 +298,12 @@ main {
 }
 
 .ingredient-tag .remove-btn:hover {
-    transform: scale(1.2) rotate(90deg);
     background: rgba(245, 101, 101, 0.9);
     border-color: rgba(255, 255, 255, 0.6);
     box-shadow: 0 4px 16px rgba(245, 101, 101, 0.4);
 }
 
 .ingredient-tag .remove-btn:active {
-    transform: scale(1.1) rotate(90deg);
 }
 
 @keyframes slideIn {
@@ -489,13 +481,11 @@ main {
 }
 
 .btn-ai:hover:not(:disabled) {
-    transform: translateY(-4px) scale(1.02);
     box-shadow: 0 16px 50px rgba(102, 126, 234, 0.5);
     background: linear-gradient(135deg, #7c9aee 0%, #8b64c7 50%, #f9a8d4 100%);
 }
 
 .btn-ai:active:not(:disabled) {
-    transform: translateY(-2px) scale(0.98);
 }
 
 .btn-ai:disabled {
@@ -507,7 +497,6 @@ main {
 }
 
 .btn-ai:disabled:hover {
-    transform: none;
     box-shadow: none;
 }
 
@@ -889,7 +878,6 @@ footer p {
 }
 
 .recipe-export-actions .btn:hover {
-    transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -980,7 +968,6 @@ footer p {
 
 .suggestion-card:hover {
     border-color: #667eea;
-    transform: translateY(-4px);
     box-shadow: 0 12px 30px rgba(102, 126, 234, 0.15);
 }
 
@@ -1170,13 +1157,11 @@ footer p {
 }
 
 .recipe-actions .btn-primary:hover {
-    transform: translateY(-5px) scale(1.05);
     box-shadow: 0 20px 50px rgba(240, 147, 251, 0.6);
     background: linear-gradient(135deg, #f9a8d4 0%, #f87171 50%, #60a5fa 100%);
 }
 
 .recipe-actions .btn-primary:active {
-    transform: translateY(-3px) scale(1.02);
 }
 
 /* ===== ADAPTATIONS POUR LE MODE SOMBRE ===== */
