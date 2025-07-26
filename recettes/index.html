@@ -138,35 +138,14 @@
 
                     <div class="constraints-section">
                         <h4>🚫 Contraintes alimentaires :</h4>
-                        <div class="constraints-grid">
-                            <label class="constraint-option">
-                                <input type="checkbox" id="vegetarien" value="végétarien">
-                                <span>🌱 Végétarien</span>
-                            </label>
-                            <label class="constraint-option">
-                                <input type="checkbox" id="vegan" value="vegan">
-                                <span>🥬 Vegan</span>
-                            </label>
-                            <label class="constraint-option">
-                                <input type="checkbox" id="sans-gluten" value="sans gluten">
-                                <span>🌾 Sans gluten</span>
-                            </label>
-                            <label class="constraint-option">
-                                <input type="checkbox" id="sans-lactose" value="sans lactose">
-                                <span>🥛 Sans lactose</span>
-                            </label>
-                            <label class="constraint-option">
-                                <input type="checkbox" id="sans-noix" value="sans noix">
-                                <span>🥜 Sans noix</span>
-                            </label>
-                            <label class="constraint-option">
-                                <input type="checkbox" id="halal" value="halal">
-                                <span>🕌 Halal</span>
-                            </label>
-                            <label class="constraint-option">
-                                <input type="checkbox" id="saison" value="fruits et légumes de saison">
-                                <span>🍅 Produits de saison</span>
-                            </label>
+                        <div class="multi-button-group" data-option="contraintes">
+                            <button type="button" class="multi-option-btn" data-value="végétarien">🌱 Végétarien</button>
+                            <button type="button" class="multi-option-btn" data-value="vegan">🥬 Vegan</button>
+                            <button type="button" class="multi-option-btn" data-value="sans gluten">🌾 Sans gluten</button>
+                            <button type="button" class="multi-option-btn" data-value="sans lactose">🥛 Sans lactose</button>
+                            <button type="button" class="multi-option-btn" data-value="sans noix">🥜 Sans noix</button>
+                            <button type="button" class="multi-option-btn" data-value="halal">🕌 Halal</button>
+                            <button type="button" class="multi-option-btn" data-value="fruits et légumes de saison" id="saison-btn">🍅 Produits de saison</button>
                         </div>
                         
                         <div id="seasonal-info" class="seasonal-info" style="display: none;">
@@ -177,27 +156,12 @@
 
                     <div class="equipment-section">
                         <h4>🔧 Matériel disponible :</h4>
-                        <div class="equipment-grid">
-                            <label class="equipment-option">
-                                <input type="checkbox" id="four" value="four" checked>
-                                <span>🔥 Four</span>
-                            </label>
-                            <label class="equipment-option">
-                                <input type="checkbox" id="plaques" value="plaques" checked>
-                                <span>🍳 Plaques de cuisson</span>
-                            </label>
-                            <label class="equipment-option">
-                                <input type="checkbox" id="micro-ondes" value="micro-ondes">
-                                <span>📡 Micro-ondes</span>
-                            </label>
-                            <label class="equipment-option">
-                                <input type="checkbox" id="robot" value="robot">
-                                <span>🤖 Robot mixeur</span>
-                            </label>
-                            <label class="equipment-option">
-                                <input type="checkbox" id="friteuse" value="friteuse">
-                                <span>🍟 Friteuse</span>
-                            </label>
+                        <div class="multi-button-group" data-option="materiel">
+                            <button type="button" class="multi-option-btn active" data-value="four">🔥 Four</button>
+                            <button type="button" class="multi-option-btn active" data-value="plaques">🍳 Plaques</button>
+                            <button type="button" class="multi-option-btn" data-value="micro-ondes">📡 Micro-ondes</button>
+                            <button type="button" class="multi-option-btn" data-value="robot">🤖 Robot mixeur</button>
+                            <button type="button" class="multi-option-btn" data-value="friteuse">🍟 Friteuse</button>
                         </div>
                     </div>
                 </div>

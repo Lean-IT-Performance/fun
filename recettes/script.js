@@ -155,32 +155,32 @@ class RecipeGenerator {
             });
         });
 
-        // Contraintes alimentaires
-        const constraintCheckboxes = document.querySelectorAll('.constraint-option input[type="checkbox"]');
-        constraintCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                this.updateConstraints();
-                
-                // Gérer l'affichage des informations saisonnières
-                if (checkbox.id === 'saison') {
-                    this.toggleSeasonalInfo(checkbox.checked);
-                }
-            });
-        });
-
-        // Matériel
-        const equipmentCheckboxes = document.querySelectorAll('.equipment-option input[type="checkbox"]');
-        equipmentCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                this.updateEquipment();
+        // Groupes de boutons multi-sélection (contraintes et matériel)
+        document.querySelectorAll('.multi-button-group').forEach(group => {
+            const optionType = group.dataset.option;
+            
+            group.querySelectorAll('.multi-option-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Toggle l'état actif du bouton
+                    btn.classList.toggle('active');
+                    
+                    // Mettre à jour les paramètres
+                    const value = btn.dataset.value;
+                    this.updateMultiOptionParameter(optionType, value, btn.classList.contains('active'));
+                    
+                    // Gérer l'affichage des informations saisonnières
+                    if (btn.id === 'saison-btn') {
+                        this.toggleSeasonalInfo(btn.classList.contains('active'));
+                    }
+                });
             });
         });
     }
 
     updateConstraints() {
         const constraints = [];
-        document.querySelectorAll('.constraint-option input[type="checkbox"]:checked').forEach(checkbox => {
-            constraints.push(checkbox.value);
+        document.querySelectorAll('.multi-button-group[data-option="contraintes"] .multi-option-btn.active').forEach(btn => {
+            constraints.push(btn.dataset.value);
         });
         this.parameters.contraintes = constraints;
     }
@@ -235,10 +235,41 @@ class RecipeGenerator {
 
     updateEquipment() {
         const equipment = [];
-        document.querySelectorAll('.equipment-option input[type="checkbox"]:checked').forEach(checkbox => {
-            equipment.push(checkbox.value);
+        document.querySelectorAll('.multi-button-group[data-option="materiel"] .multi-option-btn.active').forEach(btn => {
+            equipment.push(btn.dataset.value);
         });
         this.parameters.materiel = equipment;
+    }
+
+    /**
+     * Met à jour un paramètre multi-sélection basé sur le type, la valeur et l'état
+     */
+    updateMultiOptionParameter(optionType, value, isActive) {
+        switch (optionType) {
+            case 'contraintes':
+                if (isActive) {
+                    if (!this.parameters.contraintes.includes(value)) {
+                        this.parameters.contraintes.push(value);
+                    }
+                } else {
+                    this.parameters.contraintes = this.parameters.contraintes.filter(c => c !== value);
+                }
+                break;
+            case 'materiel':
+                if (isActive) {
+                    if (!this.parameters.materiel.includes(value)) {
+                        this.parameters.materiel.push(value);
+                    }
+                } else {
+                    this.parameters.materiel = this.parameters.materiel.filter(m => m !== value);
+                }
+                break;
+            default:
+                console.warn('Type d\'option multi-sélection non reconnu:', optionType);
+        }
+        
+        console.log('Paramètre multi-sélection mis à jour:', optionType, '=', 
+                   optionType === 'contraintes' ? this.parameters.contraintes : this.parameters.materiel);
     }
 
     updateAIButton() {
