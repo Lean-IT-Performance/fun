@@ -714,24 +714,7 @@ main {
     box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
 }
 
-/* Indicateur visuel pour la multi-sélection */
-.multi-option-btn.active::after {
-    content: '✓';
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    width: 18px;
-    height: 18px;
-    background: #48bb78;
-    border: 2px solid white;
-    border-radius: 50%;
-    font-size: 0.7rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    line-height: 1;
-}
+/* Indicateur visuel pour la multi-sélection - supprimé sur demande utilisateur */
 
 /* Responsive pour les groupes multi-sélection */
 @media (max-width: 768px) {
@@ -746,11 +729,6 @@ main {
         gap: 0.3rem;
     }
     
-    .multi-option-btn.active::after {
-        width: 16px;
-        height: 16px;
-        font-size: 0.65rem;
-    }
 }
 
 @media (max-width: 480px) {
@@ -765,13 +743,6 @@ main {
         gap: 0.25rem;
     }
     
-    .multi-option-btn.active::after {
-        width: 14px;
-        height: 14px;
-        font-size: 0.6rem;
-        top: -1px;
-        right: -1px;
-    }
     
     /* Layout spécial pour les contraintes sur mobile */
     .constraints-section .multi-button-group {
