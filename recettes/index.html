@@ -87,7 +87,12 @@
                     <div class="options-grid">
                         <div class="option-group">
                             <label for="convives-slider">👥 Nombre de convives : <span id="convives-value">4</span></label>
-                            <input type="range" id="convives-slider" min="1" max="12" value="4" class="slider">
+                            <div class="slider-container">
+                                <button type="button" id="convives-minus" class="slider-btn" aria-label="Diminuer le nombre de convives">−</button>
+                                <input type="range" id="convives-slider" min="1" max="12" value="4" class="slider" aria-describedby="convives-help">
+                                <button type="button" id="convives-plus" class="slider-btn" aria-label="Augmenter le nombre de convives">+</button>
+                            </div>
+                            <div id="convives-help" class="sr-only">Utilisez le slider ou les boutons + et - pour ajuster le nombre de convives entre 1 et 12</div>
                         </div>
 
                         <div class="option-group">

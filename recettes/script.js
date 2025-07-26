@@ -96,15 +96,45 @@ class RecipeGenerator {
     }
 
     bindAdvancedOptions() {
-        // Slider nombre de convives
+        // Slider nombre de convives avec boutons + et -
         const convivesSlider = document.getElementById('convives-slider');
         const convivesValue = document.getElementById('convives-value');
+        const convivesMinus = document.getElementById('convives-minus');
+        const convivesPlus = document.getElementById('convives-plus');
         
+        // Fonction pour mettre à jour la valeur et l'état des boutons
+        const updateConvives = (value) => {
+            const numValue = parseInt(value);
+            convivesValue.textContent = numValue;
+            convivesSlider.value = numValue;
+            this.parameters.convives = numValue;
+            
+            // Gérer l'état des boutons
+            convivesMinus.disabled = numValue <= 1;
+            convivesPlus.disabled = numValue >= 12;
+        };
+        
+        // Event listeners
         convivesSlider.addEventListener('input', (e) => {
-            const value = e.target.value;
-            convivesValue.textContent = value;
-            this.parameters.convives = parseInt(value);
+            updateConvives(e.target.value);
         });
+        
+        convivesMinus.addEventListener('click', () => {
+            const currentValue = parseInt(convivesSlider.value);
+            if (currentValue > 1) {
+                updateConvives(currentValue - 1);
+            }
+        });
+        
+        convivesPlus.addEventListener('click', () => {
+            const currentValue = parseInt(convivesSlider.value);
+            if (currentValue < 12) {
+                updateConvives(currentValue + 1);
+            }
+        });
+        
+        // Initialiser l'état des boutons
+        updateConvives(convivesSlider.value);
 
         // Selects
         document.getElementById('type-public').addEventListener('change', (e) => {
