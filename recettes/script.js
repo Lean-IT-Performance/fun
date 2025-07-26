@@ -7,7 +7,7 @@ class RecipeGenerator {
         this.openaiModel = 'gpt-4o-mini';
         this.parameters = {
             convives: 4,
-            typePublic: 'adultes',
+            typePublic: 'mixte',  // Correspond au bouton actif par défaut
             difficulte: 'facile',
             tempsDisponible: '30min',
             typeRepas: 'déjeuner',
@@ -136,21 +136,23 @@ class RecipeGenerator {
         // Initialiser l'état des boutons
         updateConvives(convivesSlider.value);
 
-        // Selects
-        document.getElementById('type-public').addEventListener('change', (e) => {
-            this.parameters.typePublic = e.target.value;
-        });
-
-        document.getElementById('difficulte').addEventListener('change', (e) => {
-            this.parameters.difficulte = e.target.value;
-        });
-
-        document.getElementById('temps-disponible').addEventListener('change', (e) => {
-            this.parameters.tempsDisponible = e.target.value;
-        });
-
-        document.getElementById('type-repas').addEventListener('change', (e) => {
-            this.parameters.typeRepas = e.target.value;
+        // Groupes de boutons d'options
+        document.querySelectorAll('.button-group').forEach(group => {
+            const optionType = group.dataset.option;
+            
+            group.querySelectorAll('.option-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Désactiver tous les boutons du groupe
+                    group.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                    
+                    // Activer le bouton cliqué
+                    btn.classList.add('active');
+                    
+                    // Mettre à jour les paramètres
+                    const value = btn.dataset.value;
+                    this.updateOptionParameter(optionType, value);
+                });
+            });
         });
 
         // Contraintes alimentaires
@@ -205,6 +207,30 @@ class RecipeGenerator {
         } else {
             seasonalInfo.style.display = 'none';
         }
+    }
+
+    /**
+     * Met à jour un paramètre d'option basé sur le type et la valeur
+     */
+    updateOptionParameter(optionType, value) {
+        switch (optionType) {
+            case 'type-public':
+                this.parameters.typePublic = value;
+                break;
+            case 'difficulte':
+                this.parameters.difficulte = value;
+                break;
+            case 'temps-disponible':
+                this.parameters.tempsDisponible = value;
+                break;
+            case 'type-repas':
+                this.parameters.typeRepas = value;
+                break;
+            default:
+                console.warn('Type d\'option non reconnu:', optionType);
+        }
+        
+        console.log('Paramètre mis à jour:', optionType, '=', value);
     }
 
     updateEquipment() {
