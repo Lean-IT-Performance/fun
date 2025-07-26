@@ -837,6 +837,25 @@ footer p {
     color: #718096;
 }
 
+/* ===== SUPPRESSION DES EFFETS REBOND ===== */
+
+/* Surcharger les styles du shared-styles.css pour supprimer les effets de rebond */
+.btn:hover,
+.btn-primary:hover:not(:disabled),
+.btn-secondary:hover:not(:disabled),
+.btn-outline:hover:not(:disabled),
+.btn-ghost:hover:not(:disabled) {
+    transform: none !important;
+}
+
+.btn:active,
+.btn-primary:active:not(:disabled),
+.btn-secondary:active:not(:disabled),
+.btn-outline:active:not(:disabled),
+.btn-ghost:active:not(:disabled) {
+    transform: none !important;
+}
+
 /* ===== EXPORT FUNCTIONALITY STYLES ===== */
 
 /* Loading spinner pour les boutons d'export */
