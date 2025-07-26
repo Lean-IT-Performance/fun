@@ -837,22 +837,62 @@ footer p {
     color: #718096;
 }
 
-/* ===== SUPPRESSION DES EFFETS REBOND ===== */
+/* ===== SUPPRESSION TOTALE DES EFFETS REBOND ===== */
 
-/* Surcharger les styles du shared-styles.css pour supprimer les effets de rebond */
-.btn:hover,
-.btn-primary:hover:not(:disabled),
-.btn-secondary:hover:not(:disabled),
-.btn-outline:hover:not(:disabled),
-.btn-ghost:hover:not(:disabled) {
+/* RÈGLE GLOBALE : Supprimer TOUS les effets transform sur TOUS les éléments */
+* {
     transform: none !important;
 }
 
+*:hover {
+    transform: none !important;
+}
+
+*:active {
+    transform: none !important;
+}
+
+*:focus {
+    transform: none !important;
+}
+
+/* Surcharger spécifiquement tous les types de boutons */
+button,
+.btn,
+.btn-primary,
+.btn-secondary, 
+.btn-outline,
+.btn-ghost,
+.btn-ai,
+.suggestion-btn,
+.remove-btn,
+.ingredient-tag {
+    transform: none !important;
+}
+
+button:hover,
+.btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-outline:hover,
+.btn-ghost:hover,
+.btn-ai:hover,
+.suggestion-btn:hover,
+.remove-btn:hover,
+.ingredient-tag:hover {
+    transform: none !important;
+}
+
+button:active,
 .btn:active,
-.btn-primary:active:not(:disabled),
-.btn-secondary:active:not(:disabled),
-.btn-outline:active:not(:disabled),
-.btn-ghost:active:not(:disabled) {
+.btn-primary:active,
+.btn-secondary:active,
+.btn-outline:active,
+.btn-ghost:active,
+.btn-ai:active,
+.suggestion-btn:active,
+.remove-btn:active,
+.ingredient-tag:active {
     transform: none !important;
 }
 
