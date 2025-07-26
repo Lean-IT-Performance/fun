@@ -557,6 +557,77 @@ main {
     margin-bottom: 2rem;
 }
 
+/* Informations saisonnières */
+.seasonal-info {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+    border-radius: 12px;
+    border: 2px solid #48bb78;
+    border-left: 6px solid #38a169;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.seasonal-info h5 {
+    color: #2f855a;
+    margin: 0 0 0.75rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.seasonal-products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.seasonal-product {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(72, 187, 120, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+}
+
+.seasonal-product:hover {
+    background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+    box-shadow: 0 4px 10px rgba(72, 187, 120, 0.35);
+}
+
+/* Animation pour l'apparition */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Version mobile */
+@media (max-width: 768px) {
+    .seasonal-info {
+        padding: 0.75rem;
+        margin-top: 1rem;
+    }
+    
+    .seasonal-info h5 {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .seasonal-product {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+    }
+}
+
 .constraints-section h4, .equipment-section h4 {
     margin-bottom: 1rem;
     color: #2d3748;

@@ -158,6 +158,11 @@ class RecipeGenerator {
         constraintCheckboxes.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
                 this.updateConstraints();
+                
+                // Gérer l'affichage des informations saisonnières
+                if (checkbox.id === 'saison') {
+                    this.toggleSeasonalInfo(checkbox.checked);
+                }
             });
         });
 
@@ -176,6 +181,30 @@ class RecipeGenerator {
             constraints.push(checkbox.value);
         });
         this.parameters.contraintes = constraints;
+    }
+
+    /**
+     * Affiche ou masque les informations saisonnières
+     */
+    toggleSeasonalInfo(show) {
+        const seasonalInfo = document.getElementById('seasonal-info');
+        const seasonalProducts = document.getElementById('seasonal-products');
+        
+        if (show) {
+            const seasonInfo = this.getCurrentSeasonInfo();
+            
+            // Créer les badges pour les produits de saison
+            seasonalProducts.innerHTML = seasonInfo.seasonalProduce.map(product => 
+                `<span class="seasonal-product">${product}</span>`
+            ).join('');
+            
+            seasonalInfo.style.display = 'block';
+            
+            // Ajouter un message d'information
+            this.showNotification(`🌱 Mode saison activé : ${seasonInfo.season}`, 'info');
+        } else {
+            seasonalInfo.style.display = 'none';
+        }
     }
 
     updateEquipment() {
@@ -242,6 +271,58 @@ class RecipeGenerator {
     }
     
 
+    /**
+     * Détermine la saison actuelle et les produits de saison
+     */
+    getCurrentSeasonInfo() {
+        const now = new Date();
+        const month = now.getMonth() + 1; // 1-12
+        
+        let season = '';
+        let seasonalProduce = [];
+        
+        if (month >= 3 && month <= 5) {
+            season = 'printemps';
+            seasonalProduce = [
+                'asperges', 'radis', 'épinards', 'petits pois', 'fèves', 'artichauts',
+                'fraises', 'rhubarbe', 'ail nouveau', 'oignons nouveaux',
+                'laitue', 'roquette', 'cresson', 'blettes'
+            ];
+        } else if (month >= 6 && month <= 8) {
+            season = 'été';
+            seasonalProduce = [
+                'tomates', 'courgettes', 'aubergines', 'poivrons', 'concombres',
+                'haricots verts', 'maïs', 'basilic', 'menthe', 'thym',
+                'pêches', 'abricots', 'melons', 'pastèques', 'cerises',
+                'framboises', 'myrtilles', 'cassis'
+            ];
+        } else if (month >= 9 && month <= 11) {
+            season = 'automne';
+            seasonalProduce = [
+                'potirons', 'courges', 'champignons', 'poireaux', 'choux',
+                'brocolis', 'céleri', 'carottes', 'navets', 'panais',
+                'pommes', 'poires', 'raisins', 'figues', 'noix',
+                'châtaignes', 'cranberries'
+            ];
+        } else {
+            season = 'hiver';
+            seasonalProduce = [
+                'poireaux', 'choux de Bruxelles', 'chou-fleur', 'épinards',
+                'mâche', 'endives', 'cardons', 'topinambours',
+                'pommes de terre', 'carottes', 'betteraves', 'rutabaga',
+                'oranges', 'mandarines', 'pamplemousses', 'kiwis',
+                'pommes', 'poires', 'citrons'
+            ];
+        }
+        
+        return {
+            season,
+            seasonalProduce,
+            month,
+            seasonalMessage: `Produits de ${season} disponibles : ${seasonalProduce.slice(0, 8).join(', ')}`
+        };
+    }
+
     async generateAIRecipe() {
         if (this.ingredients.length === 0) {
             this.showNotification('⚠️ Ajoutez au moins un ingrédient', 'error');
@@ -250,6 +331,9 @@ class RecipeGenerator {
 
         // Sanitize les ingrédients
         const sanitizedIngredients = this.ingredients.map(ing => this.sanitizeInput(ing));
+        
+        // Obtenir les informations saisonnières
+        const seasonInfo = this.getCurrentSeasonInfo();
 
         // Préparer les données avec validation
         const requestData = {
@@ -262,7 +346,9 @@ class RecipeGenerator {
             typeRepas: this.sanitizeInput(this.parameters.typeRepas),
             materiel: this.parameters.materiel.map(m => this.sanitizeInput(m)),
             mode: 'suggestions',
-            model: this.openaiModel
+            model: this.openaiModel,
+            // Ajouter les informations saisonnières si l'option est cochée
+            seasonalInfo: this.parameters.contraintes.includes('fruits et légumes de saison') ? seasonInfo : null
         };
 
         // Valider les données
@@ -436,6 +522,9 @@ class RecipeGenerator {
         this.showDetailedRecipeLoading(suggestion.nom);
         
         try {
+            // Obtenir les informations saisonnières
+            const seasonInfo = this.getCurrentSeasonInfo();
+            
             // Préparer les données pour la recette détaillée
             const requestData = {
                 ingredients: this.ingredients,
@@ -448,7 +537,9 @@ class RecipeGenerator {
                 materiel: this.parameters.materiel,
                 mode: 'detailed',
                 chosenRecipe: suggestion.nom,
-                model: this.openaiModel
+                model: this.openaiModel,
+                // Ajouter les informations saisonnières si l'option est cochée
+                seasonalInfo: this.parameters.contraintes.includes('fruits et légumes de saison') ? seasonInfo : null
             };
 
             console.log('Génération de la recette détaillée:', requestData);
